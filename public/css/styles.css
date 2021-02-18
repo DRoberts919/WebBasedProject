@@ -1,4 +1,78 @@
-.header {
-  color: red;
-  background-color: blue;
+html,body { height:100%; }
+
+.mainPage{
+  display:flex;
+  flex-direction:row;
+  height:100%;
+}
+
+
+/* this is all the csss for the menu on the right side of the page */
+.accountMenu{
+  position: relative;
+  background-color: #90C3E3;
+  flex-direction: collumn;
+  height: 100%;
+  
+}
+
+.logOut{
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  padding-right: 70px;
+  font-size:4rem;
+}
+
+
+
+.circle{
+  height: 128px;
+  width: 128px;
+  background-color: #ffff;
+  border-radius: 50%;
+  margin-left: 20px;
+  margin-top: 20px;
+}
+
+
+
+
+/* css for the account heading "boads"*/
+
+.heading{
+  box-shadow: 0 8px 6px -6px black;
+
+}
+
+
+.boardsLabel{
+  padding-left: 20px;
+  font-size:12rem;
+  font-weight:bolder;
+}
+
+/* css for the body part where we can select boards that we can create and or delete*/
+
+.bodyPage{
+  height: 83%;
+  padding-left: 20px;
+  background-color: #E6F4F1;
+}
+
+/* css for the boards that are created */
+
+.board{
+  width: 290px;
+  height:142px;
+  border-radius: 20px;
+  background-color: aqua;
+  margin-left: 20px;
+  margin-top: 10px;
+
+  transition: all .2s ease-in-out;
+}
+
+.board:hover{
+  transform: scale(1.1);
 }
