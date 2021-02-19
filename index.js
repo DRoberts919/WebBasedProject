@@ -13,6 +13,7 @@ const port = 3000;
 app.set('view engine', 'pug');
 app.set('views', __dirname + '/views');
 app.use(express.static(path.join(__dirname + '/public')))
+app.use(bodyParser.urlencoded({extended: false}));
 
 
 const urlEncodedParser = bodyParser.urlencoded({
@@ -28,7 +29,6 @@ app.use(express_session({
   })
 );
 
-
 //routes that are then handled withing our routes.js file
 app.get('/',routes.index);
 app.get('/login',routes.login);
@@ -37,10 +37,12 @@ app.get('/account',routes.account);
 app.get('/boards',routes.boards);
 
 
+app.post('/login',(req, res) => {
+  let username = req.body.username;
+  let password = req.body.password;
 
-
-
-
+  res.send(`Username: ${username} Password: ${password}`);
+});
 
 
 
