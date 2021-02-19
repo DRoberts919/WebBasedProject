@@ -11,8 +11,10 @@ CreateBoard = () =>{
 
     //add a class to the board for styling
     boardDiv.classList.add('board');
+    boardDiv.id = 'usersBoard';
+    
 
-    var recentsDiv = document.getElementById('bodyPage');
+    var recentsDiv = document.getElementById('currentBoard');
 
     recentsDiv.appendChild(boardDiv);
 }

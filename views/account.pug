@@ -7,11 +7,11 @@ block content
             hr
             ul 
                 li 
-                    a Account 
+                    a(class="menuTag") Account 
                 li 
-                    a Settings 
+                    a(class="menuTag") Settings 
                 li 
-                    a About
+                    a(class="menuTag") About
             span(class="logOut")
                 a(href="/") Log Out
 
@@ -23,7 +23,15 @@ block content
 
 
             div(class="row bodyPage" id="bodyPage")
-                h2 recents
-                button(id="boardBtn" onclick="CreateBoard()") Add Board
+                div(class="box-1")
+                    div(class="btn btn-one" onclick="CreateBoard()")
+                        span Add Board
+                    div
+                div
+                
+                h2 Current Board
+                //- button(id="boardBtn" onclick="CreateBoard()") Add Board
+                div(id="currentBoard")
+                h2 Recent Boards
                 
                 //- div(class="boardBoxes" id="boardBoxes" )

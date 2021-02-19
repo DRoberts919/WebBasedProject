@@ -6,8 +6,15 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const express_session = require('express-session');
 const app = express();
+const mongoose = require('mongoose');
 const port = 3000;
 
+
+//database connection
+mongoose.connect('mongodb://localhost:27017/TrelloUser', {
+    useNewUrlParser: true, //These two are just used to get rid of the warnings/errors
+    useUnifiedTopology: true
+});
 
 //pug viewEngine
 app.set('view engine', 'pug');
