@@ -1,4 +1,16 @@
 extends layout 
 
 block content
-    h1 signup
+    body(class="body-signup")
+        div(id="login-box")
+            div(class="left")
+                h1(class="reg-title") Create an Account
+                form(id="reg-form")
+                    input(type="text" placeholder="Username" autocomplete="off" class="inputField" id="username")
+                    input(type="password" placeholder="Password" autocomplete="off" class="inputField" id="password")
+                    input(type="submit" value="Create" class="submit") 
+            div(class="right")
+                span(class="loginwith")
+                button(class="signin") Log In
+            div(class="or") OR
+        

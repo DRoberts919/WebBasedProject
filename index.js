@@ -13,7 +13,6 @@ const port = 3000;
 app.set('view engine', 'pug');
 app.set('views', __dirname + '/views');
 app.use(express.static(path.join(__dirname + '/public')))
-app.use(bodyParser.urlencoded({extended: false}));
 
 
 const urlEncodedParser = bodyParser.urlencoded({
@@ -28,6 +27,13 @@ app.use(express_session({
     resave: true,
   })
 );
+
+//routes that are then handled withing our routes.js file
+app.get('/',routes.index);
+app.get('/login',routes.login);
+app.get('/signup',routes.signup);
+app.get('/account',routes.account);
+app.get('/boards',routes.boards);
 
 //routes that are then handled withing our routes.js file
 app.get('/',routes.index);

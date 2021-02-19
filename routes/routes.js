@@ -31,7 +31,7 @@ exports.account = (req,res) =>{
 };
 
 exports.boards = (req,res) =>{
-    res.render("boarsd",{
+    res.render("boards",{
         title:"boards"
     });
 };
