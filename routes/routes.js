@@ -36,4 +36,9 @@ exports.boards = (req,res) =>{
     });
 };
 
+exports.board = (req, res) => {
+    var boardid = req.boardid;
+    
+}
+
 
