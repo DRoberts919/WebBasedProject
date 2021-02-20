@@ -35,7 +35,6 @@ app.use(express_session({
   })
 );
 
-
 //routes that are then handled withing our routes.js file
 app.get('/',routes.index);
 app.get('/login',routes.login);
@@ -46,9 +45,20 @@ app.get('/boards',routes.boards);
 app.post('/boards/:boardId',routes.createboard);
 
 
+//routes that are then handled withing our routes.js file
+app.get('/',routes.index);
+app.get('/login',routes.login);
+app.get('/signup',routes.signup);
+app.get('/account',routes.account);
+app.get('/boards',routes.boards);
 
 
+app.post('/login',(req, res) => {
+  let username = req.body.username;
+  let password = req.body.password;
 
+  res.send(`Username: ${username} Password: ${password}`);
+});
 
 
 

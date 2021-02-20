@@ -1,3 +1,5 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto:400,300,500);
+
 html,body { height:100%; }
 
 .mainPage{
@@ -88,6 +90,174 @@ ul{
   transform: scale(1.1);
 }
 
+<<<<<<< HEAD
+/* Phills Css Pages */
+
+
+.body-signup {
+  margin: 0;
+  padding: 0;
+  background: #E8FCFF;
+  font-size: 16px;
+  color: #222;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 300;
+}
+
+#login-box {
+  position: relative;
+  margin: 5% auto;
+  width: 600px;
+  height: 400px;
+  background: #FFF;
+  border-radius: 2px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+}
+
+.left {
+  position: absolute;
+  top: 0;
+  left: 0;
+  box-sizing: border-box;
+  padding: 40px;
+  width: 300px;
+  height: 400px;
+}
+
+.reg-title {
+  margin: 0 0 67px 0;
+  font-weight: 300;
+  font-size: 24px;
+  user-select: none;
+}
+
+.sign-title {
+  margin: 30px 0 67px 0;
+  font-weight: 300;
+  font-size: 24px;
+  user-select: none;
+}
+
+.inputField {
+  display: block;
+  box-sizing: border-box;
+  margin: 0 0 20px 0;
+  padding: 5px;
+  width: 220px;
+  height: 32px;
+  border: none;
+  outline: none;
+  border-bottom: 1px solid #AAA;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+  font-size: 15px;
+  transition: 0.2s ease;
+}
+
+.inputField:focus {
+  border-bottom: 2px solid #90C3E3;
+  color: #90C3E3;
+  transition: 0.2s ease;
+}
+
+.submit {
+  margin-top: 92px;
+  width: 120px;
+  height: 32px;
+  background: #90C3E3;
+  border: none;
+  outline: none;
+  border-radius: 2px;
+  color: #FFF;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 500;
+  font-size: 12px;
+  text-transform: uppercase;
+  transition: 0.1s ease;
+  cursor: pointer;
+}
+
+.submit:hover,
+.submit:focus {
+  opacity: 0.8;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+  transition: 0.1s ease;
+}
+
+.submit:active {
+  opacity: 1;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+  transition: 0.1s ease;
+}
+
+.or {
+  position: absolute;
+  user-select: none;
+  top: 180px;
+  left: 280px;
+  width: 40px;
+  height: 40px;
+  background: #E8FCFF;
+  border-radius: 50%;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+  line-height: 40px;
+  text-align: center;
+}
+
+.flex {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+}
+
+.right {
+  position: absolute;
+  top: 0;
+  right: 0;
+  box-sizing: border-box;
+  padding: 40px;
+  width: 300px;
+  height: 400px;
+  background-size: cover;
+  background-position: center;
+  border-radius: 0 2px 2px 0;
+}
+
+.right .loginwith {
+  display: block;
+  margin-top: 65%;
+  font-size: 28px;
+  color: #FFF;
+  text-align: center;
+}
+
+.signin {
+  margin-bottom: 20px;
+  width: 220px;
+  height: 36px;
+  border: none;
+  outline: none;
+  border-radius: 8px;
+  background: #90C3E3;
+  color: #FFF;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  transition: 0.2s ease;
+  cursor: pointer;
+}
+
+.signin:hover,
+.signin:focus {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+  transition: 0.2s ease;
+}
+
+.signin:active {
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+  transition: 0.2s ease;
+}
+=======
 
 /* button animation */
 
@@ -153,3 +323,4 @@ ul{
   opacity: 0; 
   transform: scale(0.1, 1);
 }
+>>>>>>> 0ee58bc2ef5beb0c7865067f687e35e5547f24cc
