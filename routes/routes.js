@@ -1,10 +1,6 @@
 
 
 
-
-
-
-
 //this is where all of our routes are handled
 exports.index = (req,res) => {
     res.render("index",{
@@ -36,9 +32,6 @@ exports.boards = (req,res) =>{
     });
 };
 
-exports.board = (req, res) => {
-    var boardid = req.boardid;
-    
-}
+
 
 
