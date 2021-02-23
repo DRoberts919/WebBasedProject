@@ -1,10 +1,36 @@
 extends layout 
 
 block content
-    h1 Home page
-    div 
-        a(href='/login' class="btn btn-primary") login 
-        a(href='/signup') signup
-        a(href='/account') account
-        a(href='/boards')  boards
-        
+    div(class="homePage")
+        h1 Home page
+        header
+        div 
+            ul(class="nav nav-pills nav-justified")
+                li
+                    a(class="nav-item")
+                        a(class="nav-link active" href='/login' class="btn btn-primary") login
+    
+                li
+                    a(class="nav-item")
+                        a(class="nav-link active" href='/signup' class="btn") signup
+    
+                li
+                    a(class="nav-item")
+                        a(class="nav-link active" href='/account' class="btn") account
+
+                li
+                    a(class="nav-item")
+                        a(class="nav-link active" href='/boards' class="btn") boards
+    
+        div(class= "jumbotron color")
+            h1 Welcome To Bellow!
+            h3 A content sharing site for all of your group work needs!
+
+        div(class="row")
+            div(class= "col-xs-6 col-md-3")
+                div(href="#" class="thumbnail")
+                    img(src="..." alt="...")
+            
+                    div(class="caption")
+                        h3 Thumbnail label
+                        p njfweifwaf
