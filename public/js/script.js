@@ -99,3 +99,99 @@ for (let i = 0; i < list_items.length; i++) {
         });
     }
 }
+
+//Phill's Static JS
+
+var regform = document.getElementById('reg-form');
+if (regform) {
+    regform.addEventListener('submit', registerUser)
+}
+//fetch is a utility used by browsers to make HTTP calls
+async function registerUser(event) {
+    event.preventDefault()
+    const username = document.getElementById('username').value; //Want the value and not the DOM because stores as empty objects
+    const password = document.getElementById('password').value;
+
+    //Grabs from the input fields and pass it along the stringify function
+    const result = await fetch('/api/register', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            username,
+            password
+        })
+    }).then((res) => res.json())
+
+    if(result.status === 'ok') {
+        //alert('Success')
+    } else {
+        alert(result.error)
+    }
+
+    console.log(result);
+}
+
+var loginform = document.getElementById('login');
+if (loginform) {
+    loginform.addEventListener('submit', login);
+}
+
+async function login(event) {
+    event.preventDefault()
+    const username = document.getElementById('username').value; //Want the value and not the DOM because stores as empty objects
+    const password = document.getElementById('password').value;
+
+    //Grabs from the input fields and pass it along the stringify function
+    const result = await fetch('/api/login', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            username,
+            password
+        })
+    }).then((res) => res.json())
+
+    if(result.status === 'ok') {
+        console.log('Got the token:', result.data)
+        localStorage.setItem('token', result.data) //can persist on refreshes as well
+        //alert('Success')
+    } else {
+        alert(result.error)
+    }
+
+    console.log(result);
+}
+
+// var changeform = document.getElementById('change-form');
+// if (changeform) {
+//     changeform.addEventListener('submit', registerUser)
+// }
+// //fetch is a utility used by browsers to make HTTP calls
+// async function registerUser(event) {
+//     event.preventDefault()
+//     const password = document.getElementById('password').value;
+
+//     //Grabs from the input fields and pass it along the stringify function
+//     const result = await fetch('/api/change-password', {
+//         method: 'POST',
+//         headers: {
+//             'Content-Type': 'application/json'
+//         },
+//         body: JSON.stringify({
+//             newpassword: password,
+//             token: localStorage.getItem('token')
+//         })
+//     }).then((res) => res.json())
+
+//     if(result.status === 'ok') {
+//         //alert('Success')
+//     } else {
+//         alert(result.error)
+//     }
+
+//     console.log(result);
+// }
