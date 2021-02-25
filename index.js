@@ -141,10 +141,12 @@ app.post('/api/register', async (req, res) => {
 
   res.json({status: 'ok'})
 })
+//test commit
 
 
 //app listening on port 3000
 app.listen(port,() => console.info(`Listening on port ${port}`));
+
 
 
 
