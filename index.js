@@ -14,7 +14,7 @@ const mongoose = require('mongoose');
 const port = 3000;
 
 const JWT_SECRET = 'suu3hh94sddcd9j$%$#%sfsdfoisje*&*$^8592dfs4kjusfdddsdssfs';
-
+//this is for the commit
 
 //database connection
 mongoose.connect('mongodb://localhost:27017/TrelloUser', {
