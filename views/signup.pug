@@ -9,8 +9,9 @@ block content
                     input(type="text" placeholder="Username" autocomplete="off" class="inputField" id="username")
                     input(type="password" placeholder="Password" autocomplete="off" class="inputField" id="password")
                     input(type="submit" value="Create" class="submit") 
-            div(class="right")
+            div(class="right" href='/login')
                 span(class="loginwith")
-                button(class="signin") Log In
+                button(class="signin" ) 
+                    a( class="signin" href='/login') Log In
             div(class="or") OR
         

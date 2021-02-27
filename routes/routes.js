@@ -1,6 +1,7 @@
 
 
 
+
 //this is where all of our routes are handled
 exports.index = (req,res) => {
     res.render("index",{
@@ -22,7 +23,8 @@ exports.signup = (req,res) =>{
 
 exports.account = (req,res) =>{
     res.render("account",{
-        title:"account"
+        title:"account",
+        user: req.session.user
     });
 };
 
@@ -33,5 +35,7 @@ exports.boards = (req,res) =>{
 };
 
 
+exports.checkUser = (req,res) =>{
 
+}
 
