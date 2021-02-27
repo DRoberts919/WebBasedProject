@@ -1,7 +1,6 @@
 extends layout 
 
 block content
-
     div(class="row mainPage") 
         div(class="col-md-2 accountMenu")
             div(class="circle")
@@ -25,27 +24,31 @@ block content
 
             div(class="row bodyPage" id="bodyPage")
                 div(class='col-md-4')
-                    div(class="lists")
+                    div(class="card")
+                        <h3>To do</h3>
                             div(class="list")
-                                div(class="card")
-                                    div(class="list-item" draggable="true")
-                                        <h3>To do</h3>
-                                        <ul id="to-do-list"></ul>
-                                        <input type="text" id="toDoInput"/>
-                                        <button onclick="addToDo()">add item</button>
+                                body
+                                    script.
+                                        function addToDo() {
+                                            var b = document.createElement("input");
+                                            b.setAttribute("type", "text");
+                                            b.classList.add('listItem');
+                                            b.draggable = "true";
+
+                                            document.body.appendChild(b)
+                                        }
+                    <button onclick="addToDo()">add item</button>
+
                 div(class='col-md-4')
+                    div(class="card")
+                        <h3>In progress</h3>
                             div(class="list")
-                                div(class="card")
-                                    div(class="list-item" draggable="true")
-                                        <h3>In progress</h3>
-                                        <ul id="in-progress-list"></ul>
-                                        <input type="text" id="inProgressInput"/>
-                                        <button onclick="addInProgress()">add item</button>
+                                <ul id="in-progress-list"></ul>
+                    <button onclick="addInProgress()">add item</button>
+
                 div(class='col-md-4')
+                    div(class="card")
+                        <h3>Finished Activities</h3>
                             div(class="list")
-                                div(class="card")
-                                    div(class="list-item" draggable="true")
-                                        <h3>Finished Activities</h3>
-                                        <ul id="finished-list"></ul>
-                                        <input type="text" id="finishedInput"/>
-                                        <button onclick="addFinished()">add item</button>
+                                <ul id="finished-list"></ul>
+                    <button onclick="addFinished()">add item</button>

@@ -49,63 +49,55 @@ app.use(express_session({
 app.get('/',routes.index);
 app.get('/login',routes.login);
 app.get('/signup',routes.signup);
-app.get('/account',routes.account);
+app.get('/account',urlEncodedParser,routes.account);
+// app.post('/account',urlEncodedParser,routes.checkUser);
 app.get('/boards',routes.boards);
 //Don't have to do it this way 
 // app.post('/boards/:boardId',routes.createboard);
 
 
-//routes that are then handled withing our routes.js file
-app.get('/',routes.index);
-app.get('/login',routes.login);
-app.get('/signup',routes.signup);
-app.get('/account',routes.account);
-app.get('/boards',routes.boards);
 
 
-// app.post('/login',(req, res) => {
-//   let username = req.body.username;
-//   let password = req.body.password;
 
-//   res.send(`Username: ${username} Password: ${password}`);
-// });
-app.post('/api/change-password', (req, res) => {
-  const { token } = req.body;
-  try {
-  const user = jwt.verify(token, JWT_SECRET)
-  } catch(error) {
-      res.json({ status: 'error', error: "Don't mess with the info >:L"})
-  }
-  //console.log('JWT decoded:', user)
-  res.json({ status: 'ok' })
-})
 
 app.post('/api/login', async (req, res) => {
-
+  console.log("im here");
   const { username, password } = req.body
-
-  const user = await User.findOne({ username }).lean() //lean returns a simple json rep of the document
+    console.log(username)
+    console.log(password)
+  const user = await User.findOne({ username: username }).lean() //lean returns a simple json rep of the document
 
   if(!user) {
       return res.json({ status: 'error', error: 'Invalid username/password'})
-  }
+  }else{
 
-  if(await bcrypt.compare(password, user.password)) {
-      //its successful it finds the record, then the passwords compare to eachothers even with hash
+    if(await bcrypt.compare(password, user.password)) {
+        //its successful it finds the record, then the passwords compare to eachothers even with hash
+  
+        const token = jwt.sign
+            ({ 
+                id: user._id, 
+                username: user.username
+            }, 
+            JWT_SECRET
+        )
 
-      const token = jwt.sign
-          ({ 
-              id: user._id, 
-              username: user.username
-          }, 
-          JWT_SECRET
-      )
+        
+        res.json({ status: 'ok', data: token})
 
-      return res.json({ status: 'ok', data: token})
-  }
+        
+        res.session.user = user,
+            res.redirect('/account',token.username);
+  
+    }
 
-  res.json({ status: 'error', error: 'Invalid username/password' })
+    res.json({ status: 'error', error: 'Invalid username/password' })
+    consol.log(req.session.user = user);
+    }
+
 })
+
+
 
 app.post('/api/register', async (req, res) => {
   console.log(req.body)

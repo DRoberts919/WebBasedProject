@@ -21,40 +21,43 @@ CreateBoard = () =>{
 
 
 
-function addToDo(){
-    var ul = document.getElementById("to-do-list");
-    var toDoInput = document.getElementById("toDoInput");
-    var li = document.createElement("li");
-    li.setAttribute('id',toDoInput.value);
-    li.appendChild(document.createTextNode(toDoInput.value));
-    ul.appendChild(li);
+function addToDo() {
+    var a = document.getElementById("to-do-list");
+    var b = document.createElement("input");
+
+    b.setAttribute("type", "text");
+    b.classList.add('listItem');
+    b.draggable = "true";
+
+    a.appendChild(b);
 }
 
-function addInProgress(){
-    var ul = document.getElementById("in-progress-list");
-    var inProgressInput = document.getElementById("inProgressInput");
-    var li = document.createElement("li");
-    li.setAttribute('id',inProgressInput.value);
-    li.appendChild(document.createTextNode(inProgressInput.value));
-    ul.appendChild(li);
+function addInProgress() {
+    var a = document.getElementById("in-progress-list");
+    var b = document.createElement("input");
+
+    b.setAttribute("type", "text");
+    b.classList.add('listItem');
+    b.draggable = "true";
+
+    a.appendChild(b);
 }
 
-function addFinished(){
-    var ul = document.getElementById("finished-list");
-    var finishedInput = document.getElementById("finishedInput");
-    var li = document.createElement("li");
-    li.setAttribute('id',finishedInput.value);
-    li.appendChild(document.createTextNode(finishedInput.value));
-    ul.appendChild(li);
+function addFinished() {
+    var a = document.getElementById("finished-list");
+    var b = document.createElement("input");
+
+    b.setAttribute("type", "text");
+    b.classList.add('listItem');
+    b.draggable = "true";
+
+    a.appendChild(b);
 }
 
 
 
-
-const list_items = document.querySelectorAll('.list-item');
+const list_items = document.querySelectorAll('.listItem');
 const lists = document.querySelectorAll('.list');
-
-let draggedItem = null;
 
 for (let i = 0; i < list_items.length; i++) {
     const item = list_items[i];
@@ -159,6 +162,8 @@ async function login(event) {
         console.log('Got the token:', result.data)
         localStorage.setItem('token', result.data) //can persist on refreshes as well
         //alert('Success')
+        // window.location.href = "/account"
+        
     } else {
         alert(result.error)
     }
