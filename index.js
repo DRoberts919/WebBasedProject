@@ -84,7 +84,7 @@ app.post('/api/login', async (req, res) => {
         res.json({ status: 'ok', data: token})
 
         
-        res.session.user = user,
+        req.session.user = user,
             res.redirect('/account',token.username);
   
     }
