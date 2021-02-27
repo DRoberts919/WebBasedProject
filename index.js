@@ -9,12 +9,14 @@ const User = require('./model/user');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const { response } = require('express');
+require('dotenv').config()
 const app = express();
 const mongoose = require('mongoose');
 const port = 3000;
 
-const JWT_SECRET = 'suu3hh94sddcd9j$%$#%sfsdfoisje*&*$^8592dfs4kjusfdddsdssfs';
-//this is for the commit
+const JWT_SECRET = process.env.JWT_SECRET;
+console.log(JWT_SECRET);
+//this is for the
 
 //database connection
 mongoose.connect('mongodb://localhost:27017/TrelloUser', {
