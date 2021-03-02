@@ -27,28 +27,19 @@ block content
                     div(class="card")
                         <h3>To do</h3>
                             div(class="list")
-                                body
-                                    script.
-                                        function addToDo() {
-                                            var b = document.createElement("input");
-                                            b.setAttribute("type", "text");
-                                            b.classList.add('listItem');
-                                            b.draggable = "true";
-
-                                            document.body.appendChild(b)
-                                        }
+                                div(id="to-do-list")
                     <button onclick="addToDo()">add item</button>
 
                 div(class='col-md-4')
                     div(class="card")
                         <h3>In progress</h3>
                             div(class="list")
-                                <ul id="in-progress-list"></ul>
+                                div(id="in-progress-list")
                     <button onclick="addInProgress()">add item</button>
 
                 div(class='col-md-4')
                     div(class="card")
                         <h3>Finished Activities</h3>
                             div(class="list")
-                                <ul id="finished-list"></ul>
+                                div(id="finished-list")
                     <button onclick="addFinished()">add item</button>
