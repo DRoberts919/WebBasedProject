@@ -129,6 +129,7 @@ async function registerUser(event) {
 
     if(result.status === 'ok') {
         //alert('Success')
+        
     } else {
         alert(result.error)
     }
@@ -162,7 +163,7 @@ async function login(event) {
         console.log('Got the token:', result.data)
         localStorage.setItem('token', result.data) //can persist on refreshes as well
         //alert('Success')
-        // window.location.href = "/account"
+        window.location.href = "/account"
         
     } else {
         alert(result.error)

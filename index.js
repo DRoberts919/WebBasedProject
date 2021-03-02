@@ -14,6 +14,8 @@ const app = express();
 const mongoose = require('mongoose');
 const port = 3000;
 
+
+
 const JWT_SECRET = process.env.JWT_SECRET;
 console.log(JWT_SECRET);
 //this is for the
@@ -50,7 +52,7 @@ app.get('/',routes.index);
 app.get('/login',routes.login);
 app.get('/signup',routes.signup);
 app.get('/account',urlEncodedParser,routes.account);
-// app.post('/account',urlEncodedParser,routes.checkUser);
+app.post('/account',urlEncodedParser,routes.checkUser);
 app.get('/boards',routes.boards);
 //Don't have to do it this way 
 // app.post('/boards/:boardId',routes.createboard);
@@ -61,38 +63,41 @@ app.get('/boards',routes.boards);
 
 
 app.post('/api/login', async (req, res) => {
-  console.log("im here");
+  console.log("/api/login is working");
   const { username, password } = req.body
     console.log(username)
     console.log(password)
-  const user = await User.findOne({ username: username }).lean() //lean returns a simple json rep of the document
+  const userLogin = await User.findOne({ username: username }).lean() //lean returns a simple json rep of the document
 
-  if(!user) {
+  if(userLogin == null) {
       return res.json({ status: 'error', error: 'Invalid username/password'})
-  }else{
+  }
+  else{
 
-    if(await bcrypt.compare(password, user.password)) {
+    if(await bcrypt.compare(password, userLogin.password)) {
         //its successful it finds the record, then the passwords compare to eachothers even with hash
   
         const token = jwt.sign
             ({ 
-                id: user._id, 
-                username: user.username
+                id: userLogin._id, 
+                username: userLogin.username
             }, 
             JWT_SECRET
-        )
+        );
 
         
-        res.json({ status: 'ok', data: token})
-
+        // res.json({ status: 'ok', data: token})
+        res.json({ status: 'ok',data: token });
         
-        req.session.user = user,
-            res.redirect('/account',token.username);
-  
+
+        req.session.user = userLogin,
+            res.redirect('/account');
     }
 
+    
+
     res.json({ status: 'error', error: 'Invalid username/password' })
-    consol.log(req.session.user = user);
+    
     }
 
 })
