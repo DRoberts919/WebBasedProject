@@ -30,6 +30,23 @@ function addToDo() {
     b.draggable = "true";
 
     a.appendChild(b);
+
+    b.addEventListener('dragstart', function () {
+        console.log('dragstart');
+        draggedItem = b;
+        setTimeout(function () {
+            b.style.display = 'none';
+        }, 0);
+    });
+    
+    b.addEventListener('dragend', function () {
+        console.log('dragend');
+        setTimeout(function () {
+            draggedItem = b;
+            draggedItem.style.display = 'block';
+            draggedItem = null;
+        }, 0);
+    });
 }
 
 function addInProgress() {
@@ -41,6 +58,23 @@ function addInProgress() {
     b.draggable = "true";
 
     a.appendChild(b);
+
+    b.addEventListener('dragstart', function () {
+        console.log('dragstart');
+        draggedItem = b;
+        setTimeout(function () {
+            b.style.display = 'none';
+        }, 0);
+    });
+    
+    b.addEventListener('dragend', function () {
+        console.log('dragend');
+        setTimeout(function () {
+            draggedItem = b;
+            draggedItem.style.display = 'block';
+            draggedItem = null;
+        }, 0);
+    });
 }
 
 function addFinished() {
@@ -52,6 +86,23 @@ function addFinished() {
     b.draggable = "true";
 
     a.appendChild(b);
+
+    b.addEventListener('dragstart', function () {
+        console.log('dragstart');
+        draggedItem = b;
+        setTimeout(function () {
+            b.style.display = 'none';
+        }, 0);
+    });
+    
+    b.addEventListener('dragend', function () {
+        console.log('dragend');
+        setTimeout(function () {
+            draggedItem = b;
+            draggedItem.style.display = 'block';
+            draggedItem = null;
+        }, 0);
+    });
 }
 
 
@@ -61,7 +112,7 @@ const lists = document.querySelectorAll('.list');
 
 for (let i = 0; i < list_items.length; i++) {
     const item = list_items[i];
-
+    
     item.addEventListener('dragstart', function () {
         console.log('dragstart');
         draggedItem = item;
@@ -69,7 +120,7 @@ for (let i = 0; i < list_items.length; i++) {
             item.style.display = 'none';
         }, 0);
     });
-
+    
     item.addEventListener('dragend', function () {
         console.log('dragend');
         setTimeout(function () {
@@ -77,30 +128,29 @@ for (let i = 0; i < list_items.length; i++) {
             draggedItem = null;
         }, 0);
     });
-
-    for (let j = 0; j < lists.length; j++) {
-        const list = lists[j];
-
-        list.addEventListener('dragover' ,function (e) {
-            e.preventDefault();
-            this.style.backgroundColor = 'rgba(0, 0, 0, 0.2)';
-        });
-
-        list.addEventListener('dragenter', function(e) {
-            e.preventDefault();
-            this.style.backgroundColor = 'rgba(0, 0, 0, 0.2)';
-        });
-
-        list.addEventListener('dragleave', function(e) {
-            this.style.backgroundColor = 'rgba(0, 0, 0, 0)';
-        });
-
-        list.addEventListener('drop', function (e) {
-            console.log('drop');
-            this.append(draggedItem);
-            this.style.backgroundColor = 'rgba(0, 0, 0, 0)';
-        });
-    }
+}
+for (let j = 0; j < lists.length; j++) {
+    const list = lists[j];
+    
+    list.addEventListener('dragover' ,function (e) {
+        e.preventDefault();
+        this.style.backgroundColor = 'rgba(0, 0, 0, 0.2)';
+    });
+    
+    list.addEventListener('dragenter', function(e) {
+        e.preventDefault();
+        this.style.backgroundColor = 'rgba(0, 0, 0, 0.2)';
+    });
+    
+    list.addEventListener('dragleave', function(e) {
+        this.style.backgroundColor = 'rgba(0, 0, 0, 0)';
+    });
+    
+    list.addEventListener('drop', function (e) {
+        console.log('drop');
+        this.append(draggedItem);
+        this.style.backgroundColor = 'rgba(0, 0, 0, 0)';
+    });
 }
 
 //Phill's Static JS
