@@ -1,51 +1,41 @@
 extends layout 
 
 block content
-
     div(class="row mainPage") 
         div(class="col-md-2 accountMenu")
             div(class="circle")
+                p(name="accountName") 
             hr
             ul 
                 li 
-                    a Account 
+                    a(class="menuTag") Account 
                 li 
-                    a Settings 
+                    a(class="menuTag") Settings 
                 li 
-                    a About
+                    a(class="menuTag") About
             span(class="logOut")
                 a(href="/") Log Out
 
 
         div(class="col-md-12 ")
-            div(class="row heading")
-                h1(class="boardsLabel") Boards
-
-
-
             div(class="row bodyPage" id="bodyPage")
-                div(class='col-md-4')
-                    div(class="lists")
+                div(class='col-md-2' id="listStyle")
+                    div(class="card")
+                        <h3 style="text-align: center">To do</h3>
+                        <button onclick="addToDo()" id="buttonStyle">Add item</button>
                             div(class="list")
-                                div(class="card")
-                                    div(class="list-item" draggable="true")
-                                        <h3>To do</h3>
-                                        <ul id="to-do-list"></ul>
-                                        <input type="text" id="toDoInput"/>
-                                        <button onclick="addToDo()">add item</button>
-                div(class='col-md-4')
+                                div(id="to-do-list")
+
+                div(class='col-md-2' id="listStyle")
+                    div(class="card")
+                        <h3 style="text-align: center">In progress</h3>
+                        <button onclick="addInProgress()" id="buttonStyle">Add item</button>
                             div(class="list")
-                                div(class="card")
-                                    div(class="list-item" draggable="true")
-                                        <h3>In progress</h3>
-                                        <ul id="in-progress-list"></ul>
-                                        <input type="text" id="inProgressInput"/>
-                                        <button onclick="addInProgress()">add item</button>
-                div(class='col-md-4')
+                                div(id="in-progress-list")
+
+                div(class='col-md-2' id="listStyle")
+                    div(class="card")
+                        <h3 style="text-align: center">Finished Activities</h3>
+                        <button onclick="addFinished()" id="buttonStyle">Add item</button>
                             div(class="list")
-                                div(class="card")
-                                    div(class="list-item" draggable="true")
-                                        <h3>Finished Activities</h3>
-                                        <ul id="finished-list"></ul>
-                                        <input type="text" id="finishedInput"/>
-                                        <button onclick="addFinished()">add item</button>
+                                div(id="finished-list")
