@@ -189,7 +189,7 @@ async function login(event) {
   event.preventDefault();
   const username = document.getElementById("username").value; //Want the value and not the DOM because stores as empty objects
   const password = document.getElementById("password").value;
-
+  // debugger;
   //Grabs from the input fields and pass it along the stringify function
   const result = await fetch("/api/login", {
     method: "POST",
@@ -203,6 +203,7 @@ async function login(event) {
     }),
   });
   
+  
 
   if(result.status === 200) {
       
@@ -211,8 +212,9 @@ async function login(event) {
       window.location.href = "/account"
 
   } else {
-    localStorage.setItem('userName', null) //can persist on refreshes as well
     
+
+    localStorage.setItem('userName', null) //can persist on refreshes as well
     // alert(result.error)
   }
 
