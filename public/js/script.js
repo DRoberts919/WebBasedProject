@@ -12,6 +12,11 @@ CreateBoard = () => {
   boardDiv.classList.add("board");
   boardDiv.id = "usersBoard";
 
+
+  boardDiv.addEventListener("click", () =>{
+    window.location.href = "/boards";
+  });
+
   var recentsDiv = document.getElementById("currentBoard");
 
   recentsDiv.appendChild(boardDiv);
