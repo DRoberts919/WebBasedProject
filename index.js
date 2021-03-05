@@ -33,9 +33,7 @@ app.use("/", express.static(path.join(__dirname + "/public")));
 app.use(bodyParser.json()); //decode the body thats coming in(JSON)
 app.use(cookieParser());
 
-const urlEncodedParser = bodyParser.urlencoded({
-  extended: true,
-});
+
 
 //sessions for when we are loged in to the page
 app.use(
@@ -130,6 +128,7 @@ app.post("/api/register", async (req, res) => {
     const response = await User.create({
       username,
       password,
+      
     });
     console.log("User created successfully", response);
   } catch (error) {
