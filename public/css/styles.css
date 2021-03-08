@@ -244,16 +244,20 @@ ul{
   font-size: 14px;
   transition: 0.2s ease;
   cursor: pointer;
+  user-select: none;
 }
 
 .signin:hover,
 .signin:focus {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+  background-color: #bad8eb;
+  color: white;
   transition: 0.2s ease;
+  outline: none;
+  text-decoration: none;
 }
 
 .signin:active {
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
   transition: 0.2s ease;
 }
 

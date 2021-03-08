@@ -33,9 +33,7 @@ app.use("/", express.static(path.join(__dirname + "/public")));
 app.use(bodyParser.json()); //decode the body thats coming in(JSON)
 app.use(cookieParser());
 
-const urlEncodedParser = bodyParser.urlencoded({
-  extended: true,
-});
+
 
 //sessions for when we are loged in to the page
 app.use(
@@ -54,19 +52,17 @@ app.get("/signup", routes.signup);
 app.get("/account", (req, res) => {
   console.log("Cookies: ", req.cookies);
   const token = req.cookies.Authorization.split(" ")[1];
-  console.log(token);
+  console.log("token " + token);
 
   const decodedToken = jwt.decode(token);
-  console.log(decodedToken);
-
+  console.log("decoded " + JSON.stringify(decodedToken));
   
 
-  const userInfo = {
-      'username': decodedToken.username,
-      'id': decodedToken.id
-  }
+  // const userInfo = {
+  //   "username": decodedToken.username,
+  // };
 
-  res.render("account",{userInfo});
+  res.render("account", {decodedToken});
 });
 
 app.post("/account", routes.checkUser);
@@ -75,12 +71,14 @@ app.get("/boards", routes.boards);
 // app.post('/boards/:boardId',routes.createboard);
 
 app.post("/api/login", async (req, res) => {
+  
   console.log("/api/login is working");
   const { username, password } = req.body;
   console.log(username);
   console.log(password);
+  
   const userLogin = await User.findOne({ username: username }).lean(); //lean returns a simple json rep of the document
-
+  
   if (userLogin == null) {
     res.json({ status: "error", error: "Invalid username/password" });
   } else {
@@ -91,16 +89,12 @@ app.post("/api/login", async (req, res) => {
         {
           id: userLogin._id,
           username: userLogin.username,
-          board: userLogin.board
         },
-        JWT_SECRET
+        JWT_SECRET,
+        console.log("token Created")
       );
-      res.cookie("Authorization", "Bearer " + token);
-
-      // res.json({ status: 'ok', data: token})
-      //   res.json({ status: "ok", data: token });
-
-      //   req.session.user = userLogin;
+      // res.cookie("Authorization", "Bearer" + token);
+      res.cookie("Authorization","UserLogin"+ " " + token)
 
       res.redirect(302, "/account");
     } else {
@@ -134,6 +128,7 @@ app.post("/api/register", async (req, res) => {
     const response = await User.create({
       username,
       password,
+      
     });
     console.log("User created successfully", response);
   } catch (error) {

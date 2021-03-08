@@ -12,6 +12,11 @@ CreateBoard = () => {
   boardDiv.classList.add("board");
   boardDiv.id = "usersBoard";
 
+
+  boardDiv.addEventListener("click", () =>{
+    window.location.href = "/boards";
+  });
+
   var recentsDiv = document.getElementById("currentBoard");
 
   recentsDiv.appendChild(boardDiv);
@@ -172,9 +177,9 @@ async function registerUser(event) {
   }).then((res) => res.json());
 
   if (result.status === "ok") {
-    //alert('Success')
+    window.location.href = "/login"
   } else {
-    alert(result.error);
+    var alertbox = alert(result.error);
   }
 
   console.log(result);
@@ -189,7 +194,7 @@ async function login(event) {
   event.preventDefault();
   const username = document.getElementById("username").value; //Want the value and not the DOM because stores as empty objects
   const password = document.getElementById("password").value;
-
+  // debugger;
   //Grabs from the input fields and pass it along the stringify function
   const result = await fetch("/api/login", {
     method: "POST",
@@ -203,6 +208,7 @@ async function login(event) {
     }),
   });
   
+  
 
   if(result.status === 200) {
       
@@ -211,40 +217,17 @@ async function login(event) {
       window.location.href = "/account"
 
   } else {
-    localStorage.setItem('userName', null) //can persist on refreshes as well
     
+
+    localStorage.setItem('userName', null) //can persist on refreshes as well
     // alert(result.error)
   }
 
   console.log(result);
 }
 
-// var changeform = document.getElementById('change-form');
-// if (changeform) {
-//     changeform.addEventListener('submit', registerUser)
-// }
-// //fetch is a utility used by browsers to make HTTP calls
-// async function registerUser(event) {
-//     event.preventDefault()
-//     const password = document.getElementById('password').value;
+var redirectToLogin = document.getElementById("signin");
 
-//     //Grabs from the input fields and pass it along the stringify function
-//     const result = await fetch('/api/change-password', {
-//         method: 'POST',
-//         headers: {
-//             'Content-Type': 'application/json'
-//         },
-//         body: JSON.stringify({
-//             newpassword: password,
-//             token: localStorage.getItem('token')
-//         })
-//     }).then((res) => res.json())
-
-//     if(result.status === 'ok') {
-//         //alert('Success')
-//     } else {
-//         alert(result.error)
-//     }
-
-//     console.log(result);
-// }
+redirectToLogin.onclick = function() {
+  location.href = "/login";
+}

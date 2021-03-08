@@ -20,8 +20,9 @@ block content
         div(class="col-md-12 ")
             div(class="row heading")
                 h1(class="boardsLabel") Boards
-                h2 #{userInfo.username}
-                h2 #{userInfo.id}
+                h2 username: #{decodedToken.username}
+                h2 
+                
 
 
 
@@ -36,5 +37,6 @@ block content
                 //- button(id="boardBtn" onclick="CreateBoard()") Add Board
                 div(id="currentBoard")
                 h2 Recent Boards
+                    
                 
                 //- div(class="boardBoxes" id="boardBoxes" )
