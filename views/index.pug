@@ -1,54 +1,42 @@
 extends layout 
 
 block content
-    div(class="homePage")
-        h1 
-        header
+    div
+        body(class="homePage")
         div 
             ul(class="nav nav-pills nav-justified")
                 li
-                    a(class="nav-item")
                         a(class="nav-link active" href='/login' class="btn btn-primary") login
     
                 li
-                    a(class="nav-item")
-                        a(class="nav-link active" href='/signup' class="btn") signup
+                        a(class="nav-link active" href='/signup' class="btn btn-primary") signup
     
                 li
-                    a(class="nav-item")
-                        a(class="nav-link active" href='/account' class="btn") account
+                        a(class="nav-link active" href='/account' class="btn btn-primary") account
 
                 li
-                    a(class="nav-item")
-                        a(class="nav-link active" href='/boards' class="btn") boards
+                        a(class="nav-link active" href='/boards' class="btn btn-primary") boards
+        
+            div(id="index-header")
+                h1 Welcome To Bellow!
+                h3 A content sharing site for all of your group work needs!
+            br
+
+            div(id="textBox1")
+                h3 Get Creative
+                p With Bello you can create a board for any project imaginable. Create one for your job to keep yourself on track. Or maybe create one for a personal project so you can document your work process along the way. Whatever you need to organize your ideas Bello is there to help.
+            br
+
+            div(id="textBox2")
+                h3 Keep Track of Every Step
+                p Never forget where you left off in a project, with Bello's help you can always track which tasks have been done already verse what needs to be done next. Never worry about overlapping tasks when you use Bello Use Bello today! 
+            br
+
+            div(id="textBox3")
+                h3 Multitasking has never been easier
+                p Bello can store multipule project boards at once. Stop juggling your different responsibilities on paper, use bello today to make all your projects easier on you and your team. No more muss or fuss when it comes to team work.
+
     
-        div(class= "jumbotron color")
-            h1 Welcome To Bellow!
-            h3 A content sharing site for all of your group work needs!
-
-        div(class="row")
-            div(class= "col-xs-6 col-md-3")
-                div(href="#" class="thumbnail")
-                    img(src="creative.jpg" alt="creative")
-            
-                    div(class="caption")
-                        h3 Get Creative
-                        p With Bello you can create a board for any project imaginable. Create one for your job to keep yourself on track. Or maybe create one for a personal project so you can document your work process along the way. Whatever you need to organize your ideas Bello is there to help.
-
-        div(class="row")
-            div(class= "col-xs-6 col-md-3")
-                div(href="#" class="thumbnail")
-                    img(src="creative.jpg" alt="...")
-            
-                    div(class="caption")
-                        h3 Keep Track of Every Step
-                        p Never forget where you left off in a project, with Bello's help you can always track which tasks have been done already verse what needs to be done next. Never worry about overlapping tasks when you use Bello! 
-
-        div(class="row")
-            div(class= "col-xs-6 col-md-3")
-                div(href="#" class="thumbnail")
-                    img(src="..." alt="...")
-            
-                    div(class="caption")
-                        h3 Multitasking has never been easier
-                        p Bello can store multipule project boards at once. Stop juggling your different responsibilities on paper, use bello today to make all your projects easier on you and your team.
+       
+        
+        

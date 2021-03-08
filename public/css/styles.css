@@ -357,3 +357,18 @@ ul{
 .homePage{
   background-color: #E8FCFF;
 }
+
+#textBox1, #textBox2, #textBox3 {
+  margin-left: 5%;
+  margin-right: 5%;
+  margin-bottom: 3%;
+  float: left; 
+  text-align: center;
+  background-color: white;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  padding: 15px;
+}
+
+#index-header{
+  margin-left: 25%;
+}
