@@ -374,5 +374,10 @@ ul{
 }
 
 #index-header{
-  margin-left: 25%;
+  align-content: center;
+}
+
+
+.headerTest{
+  text-align: center;
 }

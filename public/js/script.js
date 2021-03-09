@@ -12,8 +12,7 @@ CreateBoard = () => {
   boardDiv.classList.add("board");
   boardDiv.id = "usersBoard";
 
-
-  boardDiv.addEventListener("click", () =>{
+  boardDiv.addEventListener("click", () => {
     window.location.href = "/boards";
   });
 
@@ -177,7 +176,7 @@ async function registerUser(event) {
   }).then((res) => res.json());
 
   if (result.status === "ok") {
-    window.location.href = "/login"
+    window.location.href = "/login";
   } else {
     var alertbox = alert(result.error);
   }
@@ -204,22 +203,15 @@ async function login(event) {
     body: JSON.stringify({
       username,
       password,
-      
     }),
   });
-  
-  
 
-  if(result.status === 200) {
-      
-      localStorage.setItem('userName', username) //can persist on refreshes as well
-      //alert('Success')
-      window.location.href = "/account"
-
+  if (result.status === 200) {
+    localStorage.setItem("userName", username); //can persist on refreshes as well
+    //alert('Success')
+    window.location.href = "/account";
   } else {
-    
-
-    localStorage.setItem('userName', null) //can persist on refreshes as well
+    localStorage.setItem("userName", null); //can persist on refreshes as well
     // alert(result.error)
   }
 
@@ -228,6 +220,6 @@ async function login(event) {
 
 var redirectToLogin = document.getElementById("signin");
 
-redirectToLogin.onclick = function() {
+redirectToLogin.onclick = function () {
   location.href = "/login";
-}
+};
