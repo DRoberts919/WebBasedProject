@@ -67,6 +67,12 @@ ul {
   background-color: #e6f4f1;
 }
 
+.boardsBodyPage{
+  height: 100%;
+  padding-left: 20px;
+  background-color: #E6F4F1;
+}
+
 /* css for the boards that are created */
 
 .board {
