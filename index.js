@@ -69,7 +69,7 @@ app.get("/account", async (req, res) => {
   const foundUser = await User.findById(userId);
 
   // extract the baords array
-  const userBoards =foundUser.boards;
+  const userBoards = foundUser.boards;
   // pass boards array to the account pug page
 
   res.render("account", { decodedToken, userBoards });
@@ -78,17 +78,19 @@ app.get("/account", async (req, res) => {
 app.post("/account", routes.checkUser);
 app.get("/boards", routes.boards);
 
-app.get("/boards/:boardId", (req, res) => {
+app.get("/boards", async (req, res) => {
   const boardId = req.params.boardId;
   const token = req.cookies.Authorization.split(" ")[1];
   const decodedToken = jwt.decode(token);
   const userId = decodedToken.id;
 
   //Todo get user by id from database
+  const foundUser = await User.findById(userId);
   // extract board by boardId from boards array
+  const usersBoard = foundUser.boards;
   // pass board to render
 
-  res.render("boards", {});
+  res.render("boards", { usersboard });
 });
 //Don't have to do it this way
 // app.post('/boards/:boardId',routes.createboard);
@@ -173,10 +175,11 @@ app.post("/api/boards", async (req, res) => {
   console.log(userId);
 
   const user = await User.findById(userId); //find the user based off the id
+  const boardId = user.boards.length;
 
   try {
     await user.boards.push({
-      board_Id: 1,
+      board_Id: 1++,
       board_Name: "BoardOne",
       boardLanes: [],
     });
@@ -191,28 +194,21 @@ app.post("/api/boards", async (req, res) => {
   // add a new board to the array of baords.
 });
 
-app.post("/api/boards/card", async (req, res) => {
-  const userId = req.params.userId;
-  const boardId = req.params.boardId;
-  const body = req.body;
-  const newId = new mongoose.mongo.ObjectId(userId);
-  const user = await User.find(); //find the user based off the id
+app.patch("/api/boards/card", async (req, res) => {
+  const token = req.cookies.Authorization.split(" ")[1];
+  const decodedToken = jwt.decode(token);
+  const userId = decodedToken.id;
+  console.log(userId);
+
+  const user = await User.findById(userId); //find the user based off the id
 
   //Todo: retireve user with matching userId from the database.
   // add a new board to the array of baords.
   res.send();
 });
 
-app.patch("/api/:userId/boards/:boardId/card/:cardId", (req, res) => {
-  const body = req.body;
-});
-
-// app.get("/api/:userId/boards", async (req, res) => {
-//   const userId = req.params.userId;
-// });
-
-// app.get("/api/:userId/boards/:boardId", async (req, res) => {
-//   const userId = req.params.userId;
+// app.patch("/api/boards/card", (req, res) => {
+//   const body = req.body;
 // });
 
 //app listening on port 3000
