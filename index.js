@@ -177,7 +177,7 @@ app.post("/api/boards", async (req, res) => {
   try {
     await user.boards.push({
       board_Id: 1,
-      board_Name: "BoadOne",
+      board_Name: "BoardOne",
       boardLanes: [],
     });
     await user.save();
