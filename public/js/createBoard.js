@@ -1,6 +1,8 @@
 //script to add board to database
 
-CreateBoard = () => {
+//Mr Potters script for api https://github.com/JaredPotter/grocery-api-2/blob/master/server.js
+
+CreateBoard = async () => {
   // here we create the board or just a fancy div
   // const boardDiv = document.createElement("div");
   // console.log(boardDiv);
@@ -17,17 +19,18 @@ CreateBoard = () => {
 
   // recentsDiv.appendChild(boardDiv);
 
-  fetch("http://localhost:3000/api/6042d8f1a44f1c5b1869534e/boards", {
+  const boardFetch = await fetch("http://localhost:3000/api/boards", {
     method: "POST",
-    body: JSON.stringify({
-      boardName: "",
-    }),
   })
     .then((response) => {
-      debugger;
       window.location.reload();
     })
     .catch((error) => {
       debugger;
     });
 };
+
+
+redirectBoardPage = () =>{
+  window.location.href="/boards";
+}

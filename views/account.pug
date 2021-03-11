@@ -36,8 +36,11 @@ block content
                 h2 Current Board
                 //- button(id="boardBtn" onclick="CreateBoard()") Add Board
                 div(id="currentBoard")
+                each board in userBoards
+                    div(class="board" id="usersBoard" onclick="redirectBoardPage()")
+
                 h2 Recent Boards
-                    
+                h2 #{userBoards.length}
                 
                 //- div(class="boardBoxes" id="boardBoxes" )
 

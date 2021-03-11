@@ -57,7 +57,7 @@ app.get("/", routes.index);
 app.get("/login", routes.login);
 app.get("/signup", routes.signup);
 
-app.get("/account", (req, res) => {
+app.get("/account", async (req, res) => {
   console.log("Cookies: ", req.cookies);
   const token = req.cookies.Authorization.split(" ")[1];
   console.log("token " + token);
@@ -65,26 +65,30 @@ app.get("/account", (req, res) => {
   const decodedToken = jwt.decode(token);
   console.log("decoded " + JSON.stringify(decodedToken));
   const userId = decodedToken.id;
-  //Todo get user by id from database 
-  // extract the baords array 
+  //Todo get user by id from database
+  const foundUser = await User.findById(userId);
+
+  // extract the baords array
+  const userBoards =foundUser.boards;
   // pass boards array to the account pug page
 
-  res.render("account", { decodedToken });
+  res.render("account", { decodedToken, userBoards });
 });
 
 app.post("/account", routes.checkUser);
-app.get("/boards/:boardId", (req,res) => {
+app.get("/boards", routes.boards);
+
+app.get("/boards/:boardId", (req, res) => {
   const boardId = req.params.boardId;
   const token = req.cookies.Authorization.split(" ")[1];
   const decodedToken = jwt.decode(token);
   const userId = decodedToken.id;
 
   //Todo get user by id from database
-  // extract boar by boardId from boards array
+  // extract board by boardId from boards array
   // pass board to render
 
-
-  res.render('boards',{})
+  res.render("boards", {});
 });
 //Don't have to do it this way
 // app.post('/boards/:boardId',routes.createboard);
@@ -162,19 +166,32 @@ app.post("/api/register", async (req, res) => {
 
 // api call to add a board to the users board to the database
 
-app.post("/api/:userId/boards", async (req, res) => {
-  const userId = req.params.userId;
-  const body = req.body;
-  const newId = new mongoose.mongo.ObjectId(userId);
-  const user = await User.find(); //find the user based off the id
+app.post("/api/boards", async (req, res) => {
+  const token = req.cookies.Authorization.split(" ")[1];
+  const decodedToken = jwt.decode(token);
+  const userId = decodedToken.id;
+  console.log(userId);
+
+  const user = await User.findById(userId); //find the user based off the id
+
+  try {
+    await user.boards.push({
+      board_Id: 1,
+      board_Name: "BoadOne",
+      boardLanes: [],
+    });
+    await user.save();
+    res.json();
+  } catch (error) {
+    res.json({ Message: error });
+  }
 
   //Todo: retireve user with matching userId from the database.
+
   // add a new board to the array of baords.
-  res.send();
 });
 
-
-app.post("/api/:userId/boards/:boardId/card", async (req, res) => {
+app.post("/api/boards/card", async (req, res) => {
   const userId = req.params.userId;
   const boardId = req.params.boardId;
   const body = req.body;
@@ -186,11 +203,9 @@ app.post("/api/:userId/boards/:boardId/card", async (req, res) => {
   res.send();
 });
 
-
-
-app.patch("/api/:userId/boards/:boardId/card/:cardId", (req,res) => {
+app.patch("/api/:userId/boards/:boardId/card/:cardId", (req, res) => {
   const body = req.body;
-})
+});
 
 // app.get("/api/:userId/boards", async (req, res) => {
 //   const userId = req.params.userId;

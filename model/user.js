@@ -1,6 +1,5 @@
 const mongoose = require("mongoose");
 
-
 const UserSchema = new mongoose.Schema(
   {
     username: { type: String, required: true, unique: true },
@@ -8,48 +7,38 @@ const UserSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    boards:[ 
+    boards: [
       {
-        board_Id: { type: Number,},
-        board_Name: { type: String},
-        boardLanes:
-        [
-          { 
-            lane_One:
-            [
+        board_Id: { type: Number },
+        board_Name: { type: String },
+        boardLanes: [
+          {
+            lane_One: [
               {
-                card_id: { type: Number,},
-                card_Text: { type: String}
-              }
+                card_id: { type: Number },
+                card_Text: { type: String },
+              },
             ],
-            lane_Two:
-            [
+            lane_Two: [
               {
-                card_id: { type: Number,},
-                card_Text: { type: String}
-              }
+                card_id: { type: Number },
+                card_Text: { type: String },
+              },
             ],
-            lane_Three:
-            [
+            lane_Three: [
               {
-                card_id: { type: Number,},
-                card_Text: { type: String}
-              }
+                card_id: { type: Number },
+                card_Text: { type: String },
+              },
             ],
-
-          }
-        ]
-      }
-    ] 
-    
+          },
+        ],
+      },
+    ],
   },
   { collation: "users" }
 );
 
-
-
 const model = mongoose.model("UserSchema", UserSchema);
 
 module.exports = model;
-
-

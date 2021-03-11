@@ -1,34 +1,33 @@
 @import url(https://fonts.googleapis.com/css?family=Roboto:400,300,500);
 
-html,body { height:100%; }
-
-.mainPage{
-  display:flex;
-  flex-direction:row;
-  height:100%;
+html,
+body {
+  height: 100%;
 }
 
+.mainPage {
+  display: flex;
+  flex-direction: row;
+  height: 100%;
+}
 
 /* this is all the csss for the menu on the right side of the page */
-.accountMenu{
+.accountMenu {
   position: relative;
-  background-color: #90C3E3;
+  background-color: #90c3e3;
   flex-direction: collumn;
   height: 100%;
-  
 }
 
-.logOut{
+.logOut {
   position: absolute;
   bottom: 0;
   right: 0;
   padding-right: 70px;
-  font-size:4rem;
+  font-size: 4rem;
 }
 
-
-
-.circle{
+.circle {
   height: 128px;
   width: 128px;
   background-color: #ffff;
@@ -37,69 +36,63 @@ html,body { height:100%; }
   margin-top: 20px;
 }
 
-
-ul{
+ul {
   list-style-type: none;
 }
 
-.menuTag{
+.menuTag {
   color: whitesmoke;
   font-size: 2rem;
   font-weight: bold;
   margin: 0 10px 0 10px;
-
 }
-
 
 /* css for the account heading "boads"*/
 
-.heading{
+.heading {
   box-shadow: 0 8px 6px -6px black;
-
 }
 
-
-.boardsLabel{
+.boardsLabel {
   padding-left: 20px;
-  font-size:12rem;
-  font-weight:bolder;
+  font-size: 12rem;
+  font-weight: bolder;
 }
 
 /* css for the body part where we can select boards that we can create and or delete*/
 
-.bodyPage{
-  height: 83%;
+.bodyPage {
+  height: 100%;
   padding-left: 20px;
-  background-color: #E6F4F1;
+  background-color: #e6f4f1;
 }
 
 /* css for the boards that are created */
 
-.board{
+.board {
   width: 290px;
-  height:142px;
+  height: 142px;
   border-radius: 20px;
-  background-color: #90C3E3;
+  background-color: #90c3e3;
   margin-left: 20px;
   margin-top: 10px;
 
-  transition: all .3s ease-in-out;
+  transition: all 0.3s ease-in-out;
 }
 
-.board:hover{
+.board:hover {
   transform: scale(1.1);
 }
 
 /* Phills Css Pages */
 
-
 .body-signup {
   margin: 0;
   padding: 0;
-  background: #E8FCFF;
+  background: #e8fcff;
   font-size: 16px;
   color: #222;
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
   font-weight: 300;
 }
 
@@ -108,7 +101,7 @@ ul{
   margin: 5% auto;
   width: 600px;
   height: 400px;
-  background: #FFF;
+  background: #fff;
   border-radius: 2px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
 }
@@ -146,16 +139,16 @@ ul{
   height: 32px;
   border: none;
   outline: none;
-  border-bottom: 1px solid #AAA;
-  font-family: 'Roboto', sans-serif;
+  border-bottom: 1px solid #aaa;
+  font-family: "Roboto", sans-serif;
   font-weight: 400;
   font-size: 15px;
   transition: 0.2s ease;
 }
 
 .inputField:focus {
-  border-bottom: 2px solid #90C3E3;
-  color: #90C3E3;
+  border-bottom: 2px solid #90c3e3;
+  color: #90c3e3;
   transition: 0.2s ease;
 }
 
@@ -163,12 +156,12 @@ ul{
   margin-top: 92px;
   width: 120px;
   height: 32px;
-  background: #90C3E3;
+  background: #90c3e3;
   border: none;
   outline: none;
   border-radius: 2px;
-  color: #FFF;
-  font-family: 'Roboto', sans-serif;
+  color: #fff;
+  font-family: "Roboto", sans-serif;
   font-weight: 500;
   font-size: 12px;
   text-transform: uppercase;
@@ -196,7 +189,7 @@ ul{
   left: 280px;
   width: 40px;
   height: 40px;
-  background: #E8FCFF;
+  background: #e8fcff;
   border-radius: 50%;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
   line-height: 40px;
@@ -226,7 +219,7 @@ ul{
   display: block;
   margin-top: 65%;
   font-size: 28px;
-  color: #FFF;
+  color: #fff;
   text-align: center;
 }
 
@@ -237,9 +230,9 @@ ul{
   border: none;
   outline: none;
   border-radius: 8px;
-  background: #90C3E3;
-  color: #FFF;
-  font-family: 'Roboto', sans-serif;
+  background: #90c3e3;
+  color: #fff;
+  font-family: "Roboto", sans-serif;
   font-weight: 500;
   font-size: 14px;
   transition: 0.2s ease;
@@ -263,9 +256,9 @@ ul{
 
 /* button animation */
 
-.box-1 { 
-  background-color: #90C3E3; 
-  width:250px;
+.box-1 {
+  background-color: #90c3e3;
+  width: 250px;
   margin-top: 20px;
 }
 
@@ -286,7 +279,7 @@ ul{
   transition: all 0.3s;
 }
 .btn-one::before {
-  content: '';
+  content: "";
   position: absolute;
   bottom: 0;
   left: 0;
@@ -299,19 +292,19 @@ ul{
   border-bottom-width: 1px;
   border-top-style: solid;
   border-bottom-style: solid;
-  border-top-color: rgba(255,255,255,0.5);
-  border-bottom-color: rgba(255,255,255,0.5);
+  border-top-color: rgba(255, 255, 255, 0.5);
+  border-bottom-color: rgba(255, 255, 255, 0.5);
   transform: scale(0.1, 1);
 }
 .btn-one:hover span {
   letter-spacing: 2px;
 }
 .btn-one:hover::before {
-  opacity: 1; 
-  transform: scale(1, 1); 
+  opacity: 1;
+  transform: scale(1, 1);
 }
 .btn-one::after {
-  content: '';
+  content: "";
   position: absolute;
   bottom: 0;
   left: 0;
@@ -319,36 +312,35 @@ ul{
   height: 100%;
   z-index: 1;
   transition: all 0.3s;
-  background-color: rgba(255,255,255,0.1);
+  background-color: rgba(255, 255, 255, 0.1);
 }
 .btn-one:hover::after {
-  opacity: 0; 
+  opacity: 0;
   transform: scale(0.1, 1);
 }
 
-
 /* Boards css */
 .list {
-  border: 4px solid #90C3E3;
+  border: 4px solid #90c3e3;
   border-radius: 25px;
   padding: 25px;
 }
 
 #listStyle {
   margin-left: 125px;
-  margin-right: 125px;
+  /* margin-right: 125px; */
 }
 
 #buttonStyle {
   border: 2px solid black;
   border-radius: 15px;
-  margin: 0px -40px; 
-  position:relative;
-  left:50%;
+  margin: 0px -40px;
+  position: relative;
+  left: 50%;
 }
 
 #buttonStyle:hover {
-  background-color: #90C3E3
+  background-color: #90c3e3;
 }
 
 .listItem {
@@ -358,26 +350,27 @@ ul{
 }
 
 /* index css */
-.homePage{
-  background-color: #E8FCFF;
+.homePage {
+  background-color: #e8fcff;
 }
 
-#textBox1, #textBox2, #textBox3 {
+#textBox1,
+#textBox2,
+#textBox3 {
   margin-left: 5%;
   margin-right: 5%;
   margin-bottom: 3%;
-  float: left; 
+  float: left;
   text-align: center;
   background-color: white;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   padding: 15px;
 }
 
-#index-header{
+#index-header {
   align-content: center;
 }
 
-
-.headerTest{
+.headerTest {
   text-align: center;
 }
