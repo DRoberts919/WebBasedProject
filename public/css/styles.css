@@ -67,10 +67,10 @@ ul {
   background-color: #e6f4f1;
 }
 
-.boardsBodyPage{
+.boardsBodyPage {
   height: 100%;
   padding-left: 20px;
-  background-color: #E6F4F1;
+  background-color: #e6f4f1;
 }
 
 /* css for the boards that are created */
@@ -353,6 +353,7 @@ ul {
   margin: 2px;
   border-color: grey;
   background-color: whitesmoke;
+  width: 100%;
 }
 
 /* index css */

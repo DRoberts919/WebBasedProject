@@ -90,7 +90,7 @@ app.get("/boards", async (req, res) => {
   const usersBoard = foundUser.boards;
   // pass board to render
 
-  res.render("boards", { usersboard });
+  res.render("boards", { usersBoard });
 });
 //Don't have to do it this way
 // app.post('/boards/:boardId',routes.createboard);
@@ -168,44 +168,44 @@ app.post("/api/register", async (req, res) => {
 
 // api call to add a board to the users board to the database
 
-app.post("/api/boards", async (req, res) => {
-  const token = req.cookies.Authorization.split(" ")[1];
-  const decodedToken = jwt.decode(token);
-  const userId = decodedToken.id;
-  console.log(userId);
+// app.post("/api/boards", async (req, res) => {
+//   const token = req.cookies.Authorization.split(" ")[1];
+//   const decodedToken = jwt.decode(token);
+//   const userId = decodedToken.id;
+//   console.log(userId);
 
-  const user = await User.findById(userId); //find the user based off the id
-  const boardId = user.boards.length;
+//   const user = await User.findById(userId); //find the user based off the id
+//   const boardId = user.boards.length;
 
-  try {
-    await user.boards.push({
-      board_Id: boardId,
-      board_Name: "BoadOne",
-      boardLanes: [],
-    });
-    await user.save();
-    res.json();
-  } catch (error) {
-    res.json({ Message: error });
-  }
+//   try {
+//     await user.boards.push({
+//       board_Id: boardId,
+//       board_Name: "BoadOne",
+//       boardLanes: [],
+//     });
+//     await user.save();
+//     res.json();
+//   } catch (error) {
+//     res.json({ Message: error });
+//   }
 
-  //Todo: retireve user with matching userId from the database.
+//   //Todo: retireve user with matching userId from the database.
 
-  // add a new board to the array of baords.
-});
+//   // add a new board to the array of baords.
+// });
 
-app.patch("/api/boards/card", async (req, res) => {
-  const token = req.cookies.Authorization.split(" ")[1];
-  const decodedToken = jwt.decode(token);
-  const userId = decodedToken.id;
-  console.log(userId);
+// app.patch("/api/boards/card", async (req, res) => {
+//   const token = req.cookies.Authorization.split(" ")[1];
+//   const decodedToken = jwt.decode(token);
+//   const userId = decodedToken.id;
+//   console.log(userId);
 
-  const user = await User.findById(userId); //find the user based off the id
+//   const user = await User.findById(userId); //find the user based off the id
 
-  //Todo: retireve user with matching userId from the database.
-  // add a new board to the array of baords.
-  res.send();
-});
+//   //Todo: retireve user with matching userId from the database.
+//   // add a new board to the array of baords.
+//   res.send();
+// });
 
 // app.patch("/api/boards/card", (req, res) => {
 //   const body = req.body;
