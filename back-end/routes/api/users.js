@@ -84,7 +84,7 @@ const checkSession = (req, res) => {
 const checkCredentials = (req, res) => {
 	let user_id = null;
 	if(req.session && req.session.user_id) user_id = req.session.user_id;
-	dal.checkCredentials({user_id, username: req.body.username, email: req.body.email}).then(response => {
+	dal.checkCredentials({user_id, email: req.body.email}).then(response => {
 		// console.log(req.body.username, req.body.email);
 		// console.log(response);
 		res.json(response);

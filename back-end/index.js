@@ -41,7 +41,7 @@ const routeManager = require('./routes/manager');
 routeFiles.forEach((file) => {
         let component = require(`./routes/${file}`);
         if (component.configure) component.configure({
-                dal, upload
+                dal
         });
         routeManager.apply(app, component);
 });
