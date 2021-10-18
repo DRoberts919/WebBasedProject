@@ -82,10 +82,7 @@ const getUserByEmail = async ({email}) => {
 const updateUser = async (user_id, user) => {
 	let newValues = { $set: {}};
 	if(!isFieldEmpty(user.username) && /^[a-zA-Z0-9_ ]+$/.test(user.username)) newValues['$set'].username = user.username;
-	if(!isFieldEmpty(user.first_name) && /^[a-zA-Z- ]+$/.test(user.first_name)) newValues['$set'].first_name = user.first_name;
-	if(!isFieldEmpty(user.last_name) && /^[a-zA-Z- ]+$/.test(user.last_name)) newValues['$set'].last_name = user.last_name;
-	if(user.icon_id) newValues['$set'].icon_id = user.icon_id;
-	if(user.is_seller) newValues['$set'].is_seller = (user.is_seller == true);
+	if(!isFieldEmpty(user.name) && /^[a-zA-Z- ]+$/.test(user.name)) newValues['$set'].name = user.name;
 	return await dbclient.db('QuantFreelance').collection('Users').updateOne({user_id}, newValues)
 	.catch(err => { throw ['An error occurred while updating user'];});
 
@@ -99,11 +96,11 @@ const removeUser = async (user_id) => {
 
 
 const authenticate = async ({identifier, password}) => {
-	return dbclient.db('QuantFreelance').collection('Users').findOne({$or:[{"username":identifier},{"email":identifier}]})
+	return dbclient.db('QuantFreelance').collection('Users').findOne({"email":identifier})
 		.then(result => {
 			if (result)
 				return verify_hash(result.password, password).then(ok => {
-					if (ok) return {user_id: result.user_id, is_seller: result.is_seller};
+					if (ok) return result.user_id;
 					else return undefined;
 				});
 			else return undefined; 
@@ -139,10 +136,15 @@ const createBoard = async (user_id, _board) => {
 	
 }
 const getBoardById = async (board_id) => {
-	return await dbclient.db('QuantFreelance').collection('Boards').findOne({board_id}).then(result => {
-		return result;
-	})
-	.catch(err => { throw ['An error occurred while finding board by id'];});
+    getBoardById(board_id).then(result => {
+        if(result.user_id != user_id) throw ['The user does not own the board they are attemting to get'];
+	
+		return await dbclient.db('QuantFreelance').collection('Boards').findOne({board_id}).then(result => {
+            return result;
+        })
+        .catch(err => { throw ['An error occurred while finding board by id'];});
+	}).catch(err => { console.log(err); throw ['An error occurred while updating board'];});
+	
 }
 
 const getBoardsByUser = async (user_id) => {
@@ -156,7 +158,8 @@ const getBoardsByUser = async (user_id) => {
 
 const updateBoard = async (board_id, user_id, board) => {
 	//check if current user owns the board
-	getProductById(board_id).then(result => {
+	getBoardById(board_id).then(result => {
+        if(result.user_id != user_id) throw ['The user does not own the board they are attemting to update'];
 		let newValues = { $set: {
 			name: board.name,
 			taskLists: board.tasksLists
@@ -169,9 +172,15 @@ const updateBoard = async (board_id, user_id, board) => {
 
 
 
-const removeBoard = async (board_id) => {
-	return await dbclient.db('QuantFreelance').collection('Boards').deleteOne({board_id})
-	.catch(err => { throw ['An error occurred while removing board'];});
+const removeBoard = async (board_id, user_id) => {
+    getBoardById(board_id).then(result => {
+        if(result.user_id != user_id) throw ['The user does not own the board they are attemting to remove'];
+		
+		return await dbclient.db('QuantFreelance').collection('Boards').deleteOne({board_id})
+	    .catch(err => { throw ['An error occurred while removing board'];});
+	}).catch(err => { console.log(err); throw ['An error occurred while updating board'];});
+
+	
 	
 }
 

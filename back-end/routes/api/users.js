@@ -10,9 +10,7 @@ const createUser = (req, res) => {
 	dal.createUser(req.body)
 		.then(({user_id, is_seller}) => {
 			req.session.user_id = user_id.toString(); // log them in
-			req.session.is_seller = is_seller.toString(); // log them in
 			console.log("session created");
-			//res.header('Location', '/api/auth');
 			res.status(201);
 			res.statusMessage = 'Created User';
 			res.end();
@@ -30,7 +28,6 @@ const authenticate = (req, res, next) => {
 			}
 			if (value.user_id) {
 				req.session.user_id = value.user_id;
-				req.session.is_seller = value.is_seller.toString(); // log them in
 
 				console.log("session created");
 				res.statusMessage = 'Authenticated';
