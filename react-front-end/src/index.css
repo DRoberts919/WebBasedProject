@@ -116,7 +116,28 @@ nav .btn-group > button {
         Form
 ======================*/
 
+form {
+  max-width: 800px;
+  padding:0.5rem;
+  width:100%;
+}
 
+
+form label {
+  color: var(--color-dark);
+  display: block;
+}
+
+form input {
+  color: var(--color-dark);
+  background-color: var(--color-secondary);
+  display: block;
+}
+
+form .error-message {
+  color: var(--color-danger);
+  font-size: 0.95rem;
+}
 
 
 
