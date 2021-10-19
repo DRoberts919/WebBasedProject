@@ -45,7 +45,7 @@ const findErrors = fields => {
 const createUser = async (_user) => {
 	const errors = findErrors([
 		{name: "email", value: _user.email, regex: /\w+@\w+\.\w+/}, 
-		{name: "name", value: _user.first_name, regex: /^[a-zA-Z- ]+$/}, 
+		{name: "name", value: _user.name, regex: /^[a-zA-Z- ]+$/}, 
 		{name: "password", value: _user.password, regex: /^(?=.*[A-Za-z])(?=.*\d).{8,}$/}, 
 	]);
 	if (errors.length) {
@@ -68,7 +68,9 @@ const createUser = async (_user) => {
 const getUserById = async ({user_id}) => {
 	return await dbclient.db('Bello').collection('Users').findOne({"user_id": user_id}).then(result => {
 		if(!result) return null;
-		delete result.password; return result;
+		delete result.password; 
+        delete result._id;
+        return result;
 	})
 	.catch(err => { throw ['An error occurred while finding user by id'];});
 }
