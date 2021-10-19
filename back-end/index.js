@@ -18,30 +18,29 @@ app.use(bodyParser.urlencoded({
 app.use(bodyParser.json());
 
 
-//app.use(require('cookie-parser')(require('./secrets').session.secret));
+// app.use(require('cookie-parser')(require('./secrets').session.secret));
 
-// app.use(session({
-//         store: MongoStore.create({
-//                 mongoUrl: require('./secrets').mongo.connectionString,
-//                 dbName: 'Bello'
-//         }),
-//         secret: require('./secrets').session.secret,
-//         resave: false,
-//         saveUninitialized: false,
-//         cookie: {
-//                 maxAge: 1000 * 60 * 60 * 24 * 30,
-//                 sameSite: 'lax',
-//                 secure: 'auto',
-//                 httpOnly: false
-//         }
-// }));
+app.use(session({
+        store: MongoStore.create({
+                mongoUrl: require('../secrets').db.connectionString,
+                dbName: 'Bello'
+        }),
+        secret: require('../secrets').session.secret,
+        resave: false,
+        saveUninitialized: false,
+        cookie: {
+                maxAge: 1000 * 60 * 60 * 24 * 30,
+                sameSite: 'lax',
+                secure: 'auto'
+        }
+}));
 
 let routeFiles = ['api/boards', 'api/users'];
 const routeManager = require('./routes/manager');
 routeFiles.forEach((file) => {
         let component = require(`./routes/${file}`);
         if (component.configure) component.configure({
-                dal, upload
+                dal
         });
         routeManager.apply(app, component);
 });

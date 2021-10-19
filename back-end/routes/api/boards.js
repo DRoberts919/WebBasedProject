@@ -43,7 +43,7 @@ const updateBoard = (req, res) => {
 
 
 const removeBoard = (req, res) => {
-	dal.removeBoard(req.body.board_id).then(() => {
+	dal.removeBoard(req.params.board_id).then(() => {
 		res.status(204);
 		res.statusMessage = 'Removed Board';
 		res.end();
