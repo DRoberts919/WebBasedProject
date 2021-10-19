@@ -32,14 +32,46 @@ p {
   color: var(--color-dark);
 }
 
+.content {
+  min-height: calc(100vh - 4rem - 3rem);
+}
+
 .section {
   width:100%;
   padding:1rem;
+  box-sizing: border-box;
 }
 
 .section.grid {
-  background-image: url("./grid-fade.svg");
+  background-image: url("./grid.svg");
+  background-repeat: repeat-x;
+  background-size: 85%;
+  padding: 5rem 1rem;
+  position: relative;
+  
+}
 
+.section.grid:before {
+  content: "";
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  background-image: linear-gradient(to top, rgba(255,255,255,0), rgba(255,255,255, 1) 90%);
+  width: 100%;
+  height: 4em;
+}
+.section.grid:after {
+  content: "";
+  position: absolute;
+  z-index: 1;
+  bottom: 0;
+  left: 0;
+  pointer-events: none;
+  background-image: linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255, 1) 90%);
+  width: 100%;
+  height: 4em;
 }
 
 .section.primary {
@@ -59,10 +91,18 @@ p {
 nav {
   background-color: var(--color-primary);
   color: var(--color-light);
-  padding:0.25rem;
   width:100%;
-
+  box-sizing: border-box;
+  height:4rem;
 }
+
+nav h1 {
+  margin:0;
+  display:flex;
+  align-self: center;
+  
+}
+
 nav > div {
   max-width: 1300px;
   display:flex;
@@ -71,12 +111,11 @@ nav > div {
 }
 
 
-nav .btn-group {
-  display:flex;
-  flex-direction: row;
-}
+
 nav .btn-group > button {
   margin: 0 0.5rem;
+  align-self: center;
+  vertical-align: center;
 }
 
 
@@ -91,6 +130,8 @@ nav .btn-group > button {
   display: inline-block;
   color: var(--color-dark);
   font-family: "Open Sans";
+  border:none;
+  cursor:pointer;
 }
 
 .btn.solid.light {
@@ -150,5 +191,13 @@ form .error-message {
 footer {
   background-color: var(--color-secondary);
   color: var(--color-dark);
-
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  height:3rem;
+}
+footer > h5 {
+  margin:0;
 }
