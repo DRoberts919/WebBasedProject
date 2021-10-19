@@ -38,7 +38,7 @@ p {
 }
 
 .section.grid {
-  background-image: url("../public/grid-fade.svg");
+  background-image: url("./grid-fade.svg");
 
 }
 
