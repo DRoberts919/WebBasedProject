@@ -15,3 +15,49 @@
 /*====================
         Main
 ======================*/
+
+
+
+
+
+/*====================
+        Nav
+======================*/
+
+nav {
+  background-color: var(--color-primary);
+  color: var(--color-light);
+  padding:0.25rem;
+}
+nav > div {
+  max-width: 1300px;
+  display:flex;
+  flex-direction: row;
+  justify-content: space-between;
+} 
+nav .btn-group {
+  display:flex;
+}
+nav .btn-group > button {
+  margin: 0 0.5rem;
+}
+
+
+/*====================
+        Button
+======================*/
+
+.btn {
+  padding:0.35rem 0.85rem;
+  border-radius: 4px;
+  text-decoration: none;
+  display: inline-block;
+  color: var(--color-dark);
+  font-family: "Open Sans";
+}
+
+.btn.primary {
+  background-color: var(--color-light);
+  color:var(--color-primary);
+
+}
