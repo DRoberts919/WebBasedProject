@@ -15,14 +15,42 @@
 /*====================
         Main
 ======================*/
+html, body {
+  margin:0;
+  padding:0;
+}
 body {
   font-family: 'Open Sans', sans-serif;
+  color: var(--color-primary);
 }
 h1, h2, h3, h4, h5, h6 {
   font-family: 'Poppins', sans-serif;
 
 }
 
+p {
+  color: var(--color-dark);
+}
+
+.section {
+  width:100%;
+  padding:1rem;
+}
+
+.section.grid {
+  background-image: url("../public/grid-fade.svg");
+
+}
+
+.section.primary {
+  background-color: var(--color-primary);
+  color: var(--color-light);
+}
+
+.section.secondary {
+  background-color: var(--color-secondary);
+  color: var(--color-dark);
+}
 
 /*====================
         Nav
@@ -32,15 +60,20 @@ nav {
   background-color: var(--color-primary);
   color: var(--color-light);
   padding:0.25rem;
+  width:100%;
+
 }
 nav > div {
   max-width: 1300px;
   display:flex;
   flex-direction: row;
   justify-content: space-between;
-} 
+}
+
+
 nav .btn-group {
   display:flex;
+  flex-direction: row;
 }
 nav .btn-group > button {
   margin: 0 0.5rem;
@@ -60,8 +93,41 @@ nav .btn-group > button {
   font-family: "Open Sans";
 }
 
-.btn.primary {
+.btn.solid.light {
   background-color: var(--color-light);
   color:var(--color-primary);
+
+}
+
+.btn.solid.primary {
+  background-color: var(--color-primary);
+  color:var(--color-light);
+
+}
+
+.btn.outline.light {
+  background-color: transparent;
+  color:var(--color-light);
+  border:2px solid var(--color-light);
+  box-sizing: border-box;
+}
+
+/*====================
+        Form
+======================*/
+
+
+
+
+
+
+
+/*====================
+        Footer
+======================*/
+
+footer {
+  background-color: var(--color-secondary);
+  color: var(--color-dark);
 
 }
