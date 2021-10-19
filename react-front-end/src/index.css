@@ -47,6 +47,11 @@ p {
   color: var(--color-light);
 }
 
+.section.secondary {
+  background-color: var(--color-secondary);
+  color: var(--color-dark);
+}
+
 /*====================
         Nav
 ======================*/
@@ -107,3 +112,22 @@ nav .btn-group > button {
   box-sizing: border-box;
 }
 
+/*====================
+        Form
+======================*/
+
+
+
+
+
+
+
+/*====================
+        Footer
+======================*/
+
+footer {
+  background-color: var(--color-secondary);
+  color: var(--color-dark);
+
+}
