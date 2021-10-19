@@ -1,7 +1,7 @@
 const {MongoClient} = require('mongodb');
 const snowmachine = new (require('snowflake-generator'))(1420070400000);
 
-const dbclient = new MongoClient(require('../secrets.json').mongo.connectionString, {
+const dbclient = new MongoClient(require('../../secrets.json').db.connectionString, {
 	useNewUrlParser: true,
 	useUnifiedTopology: true,
 });
@@ -60,13 +60,13 @@ const createUser = async (_user) => {
 	.then(() => hash(record.password)
 		.then(hashed_password => {
 			record.password = hashed_password;
-			return dbclient.db('QuantFreelance').collection('Users').insertOne(record).then(() => (user_id));
+			return dbclient.db('Bello').collection('Users').insertOne(record).then(() => (user_id));
 		})
 	);
 }
 
 const getUserById = async ({user_id}) => {
-	return await dbclient.db('QuantFreelance').collection('Users').findOne({"user_id": user_id}).then(result => {
+	return await dbclient.db('Bello').collection('Users').findOne({"user_id": user_id}).then(result => {
 		if(!result) return null;
 		delete result.password; return result;
 	})
@@ -74,7 +74,7 @@ const getUserById = async ({user_id}) => {
 }
 
 const getUserByEmail = async ({email}) => {
-	return await dbclient.db('QuantFreelance').collection('Users').findOne({"email": email})
+	return await dbclient.db('Bello').collection('Users').findOne({"email": email})
 	.catch(err => { throw ['An error occurred while finding user by email'];});
 
 }
@@ -83,20 +83,20 @@ const updateUser = async (user_id, user) => {
 	let newValues = { $set: {}};
 	if(!isFieldEmpty(user.username) && /^[a-zA-Z0-9_ ]+$/.test(user.username)) newValues['$set'].username = user.username;
 	if(!isFieldEmpty(user.name) && /^[a-zA-Z- ]+$/.test(user.name)) newValues['$set'].name = user.name;
-	return await dbclient.db('QuantFreelance').collection('Users').updateOne({user_id}, newValues)
+	return await dbclient.db('Bello').collection('Users').updateOne({user_id}, newValues)
 	.catch(err => { throw ['An error occurred while updating user'];});
 
 }
 
 const removeUser = async (user_id) => {
-	return await dbclient.db('QuantFreelance').collection('Users').deleteOne({user_id})
+	return await dbclient.db('Bello').collection('Users').deleteOne({user_id})
 	.catch(err => { throw ['An error occurred while removing user'];});
 	
 }
 
 
 const authenticate = async ({identifier, password}) => {
-	return dbclient.db('QuantFreelance').collection('Users').findOne({"email":identifier})
+	return dbclient.db('Bello').collection('Users').findOne({"email":identifier})
 		.then(result => {
 			if (result)
 				return verify_hash(result.password, password).then(ok => {
@@ -109,7 +109,7 @@ const authenticate = async ({identifier, password}) => {
 
 const checkCredentials = async ({user_id, email}) => {
 	const errors = false;
-	await dbclient.db('QuantFreelance').collection('Users').findOne({"email": email})
+	await dbclient.db('Bello').collection('Users').findOne({"email": email})
 		.then(result => {
 			if(result && user_id != result.user_id) errors = true;
 		});
@@ -132,14 +132,14 @@ const createBoard = async (user_id, _board) => {
         user_id
     };
 
-	return dbclient.db('QuantFreelance').collection('Boards').insertOne(record).then(() => board_id);
+	return dbclient.db('Bello').collection('Boards').insertOne(record).then(() => board_id);
 	
 }
 const getBoardById = async (board_id) => {
     getBoardById(board_id).then(result => {
         if(result.user_id != user_id) throw ['The user does not own the board they are attemting to get'];
 	
-		return await dbclient.db('QuantFreelance').collection('Boards').findOne({board_id}).then(result => {
+		return dbclient.db('Bello').collection('Boards').findOne({board_id}).then(result => {
             return result;
         })
         .catch(err => { throw ['An error occurred while finding board by id'];});
@@ -148,7 +148,7 @@ const getBoardById = async (board_id) => {
 }
 
 const getBoardsByUser = async (user_id) => {
-	let boardArray = await dbclient.db('QuantFreelance').collection('Boards').find({"user_id": user_id}).toArray()
+	let boardArray = await dbclient.db('Bello').collection('Boards').find({"user_id": user_id}).toArray()
 	.catch(err => { throw ['An error occurred while finding board by user id'];});
 	return boardArray;
 }
@@ -164,7 +164,7 @@ const updateBoard = async (board_id, user_id, board) => {
 			name: board.name,
 			taskLists: board.tasksLists
 		}};
-		return dbclient.db('QuantFreelance').collection('Boards').updateOne({board_id}, newValues)
+		return dbclient.db('Bello').collection('Boards').updateOne({board_id}, newValues)
 		.catch(err => { console.log(err); throw ['An error occurred while updating board'];});
 	}).catch(err => { console.log(err); throw ['An error occurred while updating board'];});
 
@@ -176,7 +176,7 @@ const removeBoard = async (board_id, user_id) => {
     getBoardById(board_id).then(result => {
         if(result.user_id != user_id) throw ['The user does not own the board they are attemting to remove'];
 		
-		return await dbclient.db('QuantFreelance').collection('Boards').deleteOne({board_id})
+		return dbclient.db('Bello').collection('Boards').deleteOne({board_id})
 	    .catch(err => { throw ['An error occurred while removing board'];});
 	}).catch(err => { console.log(err); throw ['An error occurred while updating board'];});
 
