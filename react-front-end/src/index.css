@@ -116,9 +116,10 @@ nav h1 {
   display:flex;
   align-self: center;
   font-size: 1.75rem;
+}
+nav h1 a {
   text-decoration: none;
   color: var(--color-light);
-  
 }
 
 nav > div {
