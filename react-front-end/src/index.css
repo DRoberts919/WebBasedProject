@@ -205,7 +205,12 @@ form .error-message {
 
 
 
-
+form .formBtn {
+  display:flex;
+}
+form .formBtn button{
+  margin:1rem auto;
+}
 
 /*====================
         Footer
