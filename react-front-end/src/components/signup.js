@@ -22,7 +22,7 @@ export default function signup() {
                     <p>Confirm Password</p>
                     <input type="password" />
                 </label>
-                <div>
+                <div className="formBtn">
                     <button className="btn solid primary" type="submit">Submit</button>
                 </div>
             </form>
