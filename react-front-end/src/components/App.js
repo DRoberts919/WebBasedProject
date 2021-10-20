@@ -18,8 +18,8 @@ function App() {
         </div>
       </nav> */}
       <Routes />
-      <div className="content">
-      </div>
+      {/* <div className="content">
+      </div> */}
       <footer>
         <h5>Ryan Unroe &amp; Josh Gorham</h5>
       </footer>
