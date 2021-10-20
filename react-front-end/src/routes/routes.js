@@ -19,12 +19,14 @@ export default function Routes() {
                     </div>
                 </div>
             </nav>
-            {/* <Route path="/" Component={landing}> */}
-                <Route exact path="/" component={landing} />
-                <Route exact path="/login" component={login} />
-                <Route exact path="/signup" component={signup} />
-                <Route exact path="/board/:board_id" component={board} />
-            {/* </Route> */}
+            <div className="content">
+                {/* <Route path="/" Component={landing}> */}
+                    <Route exact path="/" component={landing} />
+                    <Route exact path="/login" component={login} />
+                    <Route exact path="/signup" component={signup} />
+                    <Route exact path="/board/:board_id" component={board} />
+                {/* </Route> */}
+            </div>
         </Router>
     )
 }
