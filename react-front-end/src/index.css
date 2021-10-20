@@ -26,6 +26,7 @@ body {
 }
 h1, h2, h3, h4, h5, h6 {
   font-family: 'Poppins', sans-serif;
+  font-weight: 600;
 
 }
 
@@ -35,6 +36,12 @@ p {
 
 .text-center {
   text-align: center;
+}
+.sub-head {
+  color: var(--color-dark);
+  font-weight: 500;
+  font-family: 'Open Sans';
+  margin: 0;
 }
 
 
@@ -116,6 +123,7 @@ nav h1 {
   display:flex;
   align-self: center;
   font-size: 1.75rem;
+  font-weight: bold;
 }
 nav h1 a {
   text-decoration: none;
