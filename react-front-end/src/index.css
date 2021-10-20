@@ -181,6 +181,7 @@ form input {
   color: var(--color-dark);
   background-color: var(--color-secondary);
   display: block;
+  border:none;
 }
 
 form .error-message {
