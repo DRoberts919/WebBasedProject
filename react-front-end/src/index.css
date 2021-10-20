@@ -116,6 +116,8 @@ nav h1 {
   display:flex;
   align-self: center;
   font-size: 1.75rem;
+  text-decoration: none;
+  color: var(--color-light);
   
 }
 
