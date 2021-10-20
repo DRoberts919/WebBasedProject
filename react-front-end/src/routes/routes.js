@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 
 import App from '../components/App';
 import board from '../components/board';
@@ -10,6 +10,15 @@ import signup from '../components/signup';
 export default function Routes() {
     return (
         <Router>
+            <nav>
+                <div>
+                    <h1><Link to="/">Bello</Link></h1>
+                    <div className="btn-group">
+                        <Link className="btn outline light" to="/signup">Sign Up</Link>
+                        <Link className="btn solid light" to="/login">Log In</Link>
+                    </div>
+                </div>
+            </nav>
             {/* <Route path="/" Component={landing}> */}
                 <Route exact path="/" component={landing} />
                 <Route exact path="/login" component={login} />
