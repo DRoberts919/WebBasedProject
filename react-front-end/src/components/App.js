@@ -21,7 +21,7 @@ function App() {
       <Routes />
       </div>
       <footer>
-        <h5>Ryan Unroe & Josh Gorham</h5>
+        <h5>Ryan Unroe &amp; Josh Gorham</h5>
       </footer>
     </div>
   );
