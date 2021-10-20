@@ -32,6 +32,11 @@ p {
   color: var(--color-dark);
 }
 
+.text-center {
+  text-align: center;
+}
+
+
 .content {
   min-height: calc(100vh - 4rem - 3rem);
   overflow: hidden;
@@ -166,13 +171,16 @@ nav .btn-group > button {
 ======================*/
 
 form {
-  max-width: 800px;
+  max-width: 500px;
   padding:0.5rem;
   width:100%;
   margin: 0 auto;
   display:block;
 }
-
+form p {
+  margin-bottom: 0.3rem;
+  margin-left: 5px;
+}
 
 form label {
   color: var(--color-dark);
@@ -184,6 +192,10 @@ form input {
   background-color: var(--color-secondary);
   display: block;
   border:none;
+  padding:0.5rem;
+  border-radius: 6px;
+  box-sizing: border-box;
+  width:100%;
 }
 
 form .error-message {
