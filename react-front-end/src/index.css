@@ -92,6 +92,10 @@ p {
   background-color: var(--color-primary);
   color: var(--color-light);
 }
+.section.primary p {
+  color: var(--color-light);
+
+}
 
 .section.secondary {
   background-color: var(--color-secondary);
@@ -104,6 +108,11 @@ p {
   max-width: 1150px;
   width:100%;
   box-sizing: border-box;
+}
+
+.spacer {
+  padding:1rem 0;
+  width:100%;
 }
 /*====================
         Nav
@@ -165,6 +174,7 @@ nav .btn-group > a {
   border:none;
   cursor:pointer;
   transition:background-color 0.15s ease;
+  font-weight: 600;
 }
 
 .btn.solid.light {

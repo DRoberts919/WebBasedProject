@@ -15,6 +15,7 @@ export default function landing() {
                 <h1>Test</h1>
             </div>
         </div>
+        <div className="spacer"></div>
         <div className="section primary">
             <div className="container">
                 <h1>Ready to Join?</h1>
