@@ -1,9 +1,9 @@
 import React from "react";
 
-export default function board() {
+export default function Board() {
     return(
-        <div>
-            <h1 className="text-center">Boards</h1>
+        <div className="section">
+            <h3 className="text-center">Project Name</h3>
         </div>
     )
 }

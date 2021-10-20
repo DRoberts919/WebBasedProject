@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 
 import App from '../components/App';
-import board from '../components/board';
-import landing from '../components/landing';
-import login from '../components/login';
-import signup from '../components/signup';
+import Board from '../components/board';
+import Landing from '../components/landing';
+import Login from '../components/login';
+import Signup from '../components/signup';
 
 export default function Routes() {
     return (
@@ -21,10 +21,10 @@ export default function Routes() {
             </nav>
             <div className="content">
                 {/* <Route path="/" Component={landing}> */}
-                    <Route exact path="/" component={landing} />
-                    <Route exact path="/login" component={login} />
-                    <Route exact path="/signup" component={signup} />
-                    <Route exact path="/board/:board_id" component={board} />
+                    <Route exact path="/" component={Landing} />
+                    <Route exact path="/login" component={Login} />
+                    <Route exact path="/signup" component={Signup} />
+                    <Route exact path="/board/:board_id" component={Board} />
                 {/* </Route> */}
             </div>
         </Router>
