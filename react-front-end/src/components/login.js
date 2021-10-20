@@ -15,7 +15,7 @@ export default function login() {
                     <input type="password" />
                 </label>
                 <div>
-                    <button type="submit">Submit</button>
+                    <button className="btn solid primary" type="submit">Submit</button>
                 </div>
             </form>
         </div>
