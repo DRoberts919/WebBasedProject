@@ -3,6 +3,7 @@
 ======================*/
 :root {
   --color-primary: #288EE0;
+  --color-primary-light: #57aaee;
   --color-secondary: #E1ECFC;
   --color-success: #45B69C;
   --color-danger: #F26666;
@@ -44,14 +45,14 @@ p {
 
 .section {
   width:100%;
-  padding:1rem;
+  /* padding:1rem; */
   box-sizing: border-box;
 }
 
 .section.grid {
   background-image: url("./grid.svg");
   background-repeat: repeat-x;
-  background-size: 85%;
+  background-size: 1200px;
   padding: 5rem 1rem;
   position: relative;
   
@@ -89,7 +90,14 @@ p {
   background-color: var(--color-secondary);
   color: var(--color-dark);
 }
-
+.container {
+  padding: 1rem;
+  margin: 0 auto;
+  display:block;
+  max-width: 1150px;
+  width:100%;
+  box-sizing: border-box;
+}
 /*====================
         Nav
 ======================*/
@@ -125,7 +133,7 @@ nav > div {
 nav .btn-group {
   margin: auto 0;
 }
-nav .btn-group > button {
+nav .btn-group > a {
   margin: 0 0.5rem;
   align-self: center;
   vertical-align: center;
@@ -145,6 +153,7 @@ nav .btn-group > button {
   font-family: "Open Sans";
   border:none;
   cursor:pointer;
+  transition:background-color 0.15s ease;
 }
 
 .btn.solid.light {
@@ -156,7 +165,10 @@ nav .btn-group > button {
 .btn.solid.primary {
   background-color: var(--color-primary);
   color:var(--color-light);
+}
 
+.btn.solid.primary:hover {
+  background-color: var(--color-primary-light);
 }
 
 .btn.outline.light {
@@ -176,6 +188,7 @@ form {
   width:100%;
   margin: 0 auto;
   display:block;
+  box-sizing: border-box;
 }
 form p {
   margin-bottom: 0.3rem;
