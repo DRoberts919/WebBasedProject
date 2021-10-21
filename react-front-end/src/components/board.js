@@ -3,7 +3,7 @@ import React from "react";
 export default function Board() {
     return(
         <div className="section">
-            <h3 className="text-center">Project Name</h3>
+            <h2 className="text-center">Project Name</h2>
         </div>
     )
 }
