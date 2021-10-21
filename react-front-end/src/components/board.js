@@ -11,7 +11,7 @@ export default function Board() {
         </div>
         <div className="list-container">
             <div className="task-list">
-                <div className="list-header">List 1</div>
+                <div className="list-header"><h3>List 1</h3></div>
                 <div className="list-body">
                     <div className="task-card">
                         <p>Card 1</p>
@@ -20,7 +20,7 @@ export default function Board() {
                 </div>
             </div>
             <div className="task-list">
-                <div className="list-header">List 2</div>
+                <div className="list-header"><h3>List 2</h3></div>
                 <div className="list-body">
                     <div className="task-card">
                         <p>Card 1</p>
