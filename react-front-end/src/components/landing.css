@@ -13,12 +13,19 @@
     justify-content: center;
 }
 .board-card {
-    margin:1rem;
+    margin:1.5rem;
     box-shadow: 2px 3px 4px rgba(0, 0, 0, 0.14);
-    min-width: 300px;
-    max-width: 300px;
+    min-width: 350px;
+    max-width: 350px;
+    min-height: 230px;
+    max-height: 230px;
     display: grid;
-    grid-template-columns: 4fr 1fr; 
+    grid-template-rows: 4fr 1fr; 
+    text-decoration: none;
+    transition: transform 0.25s ease;
+}
+.board-card:hover {
+    transform: scale(1.05);
 }
 
 .board-card > .color-section {

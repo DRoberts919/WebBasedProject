@@ -41,8 +41,7 @@ function LandingWithSession(){
                 <div className="color-section"></div>
                 <div className="text-section"><p>Board Name</p></div>
             </Link>
-        </div>
-        <div className="board-list">
+        
             <Link to="/board/:board_id" className="board-card">
                 <div className="color-section"></div>
                 <div className="text-section"><p>Board Name</p></div>
