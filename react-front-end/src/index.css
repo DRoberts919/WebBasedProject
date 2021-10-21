@@ -132,7 +132,6 @@ nav h1 {
   display:flex;
   align-self: center;
   font-size: 1.75rem;
-  font-weight: bold;
 }
 nav h1 a {
   text-decoration: none;
@@ -165,7 +164,7 @@ nav .btn-group > a {
 ======================*/
 
 .btn {
-  padding:0.35rem 0.85rem;
+  padding:0.45rem 1rem;
   border-radius: 4px;
   text-decoration: none;
   display: inline-block;
@@ -173,7 +172,7 @@ nav .btn-group > a {
   font-family: "Open Sans";
   border:none;
   cursor:pointer;
-  transition:background-color 0.15s ease;
+  transition:background-color 0.15s ease, color 0.15s ease;
   font-weight: 600;
 }
 
@@ -181,6 +180,9 @@ nav .btn-group > a {
   background-color: var(--color-light);
   color:var(--color-primary);
 
+}
+.btn.solid.light:hover {
+  background-color: #e9f5ff;
 }
 
 .btn.solid.primary {
@@ -197,6 +199,10 @@ nav .btn-group > a {
   color:var(--color-light);
   border:2px solid var(--color-light);
   box-sizing: border-box;
+}
+.btn.outline.light:hover {
+  background-color: var(--color-light);
+  color:var(--color-primary);
 }
 
 /*====================
