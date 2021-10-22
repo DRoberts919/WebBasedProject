@@ -1,6 +1,8 @@
-import React from "react";
+import React, {useContext, useEffect} from "react";
 import {Link} from "react-router-dom";
 import "./landing.css";
+import {App } from "./App";
+import {AuthContext} from "./App"
 
 function LandingWithOutSession() {
     return(
@@ -51,4 +53,16 @@ function LandingWithSession(){
     )
 }
 
-export default LandingWithSession;
+function Landing(){
+    const authing = useContext(AuthContext)
+    useEffect(()=>{
+        console.log(authing)
+    },[authing])
+    return(
+        <section>
+            {authing ? <LandingWithSession /> : <LandingWithOutSession />}
+        </section>
+    )
+}
+
+export default Landing;
