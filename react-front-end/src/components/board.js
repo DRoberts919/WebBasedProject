@@ -15,7 +15,7 @@ export default function Board() {
                 <div className="list-body">
                     <div className="task-card">
                         <p>Card 1</p>
-                        <div className="task-btn"></div>
+                        <div className="task-btn"><i className="fa fa-trash" aria-hidden="true"></i></div>
                     </div>
                 </div>
             </div>
@@ -24,10 +24,10 @@ export default function Board() {
                 <div className="list-body">
                     <div className="task-card">
                         <p>Card 1</p>
-                        <div className="task-btn"></div>
+                        <div className="task-btn"><i className="fa fa-trash" aria-hidden="true"></i></div>
                     </div><div className="task-card">
                         <p>Card 2</p>
-                        <div className="task-btn"></div>
+                        <div className="task-btn"><i className="fa fa-trash" aria-hidden="true"></i></div>
                     </div>
                 </div>
             </div>
