@@ -83,7 +83,7 @@ const getUserByEmail = async ({email}) => {
 
 const updateUser = async (user_id, user) => {
 	let newValues = { $set: {}};
-	if(!isFieldEmpty(user.username) && /^[a-zA-Z0-9_ ]+$/.test(user.username)) newValues['$set'].username = user.username;
+	if(!isFieldEmpty(user.email) && /^[a-zA-Z0-9_ ]+$/.test(user.email)) newValues['$set'].email = user.email;
 	if(!isFieldEmpty(user.name) && /^[a-zA-Z- ]+$/.test(user.name)) newValues['$set'].name = user.name;
 	return await dbclient.db('Bello').collection('Users').updateOne({user_id}, newValues)
 	.catch(err => { throw ['An error occurred while updating user'];});
