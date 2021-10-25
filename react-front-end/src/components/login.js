@@ -18,7 +18,6 @@ export default function Login() {
 
         //check all fields for errors
         //if no error, then run code below
-console.log("ran");
         const postData = {
             identifier,
             password
