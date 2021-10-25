@@ -1,4 +1,4 @@
-import React, {useContext, useEffect} from "react";
+import React, {useContext, useEffect, useState} from "react";
 import {Link} from "react-router-dom";
 import "./landing.css";
 import {App } from "./App";
@@ -31,6 +31,17 @@ function LandingWithOutSession() {
 }
 
 function LandingWithSession(){
+    const [boards, setBoards] = useState([]);
+    //fetch all boards for user
+    useEffect(() => {
+        fetch("/api/boards", {credentials: "include"})
+        .then(response => response.json())
+        .then(data => {
+            setBoards(data);
+        })
+        .catch(err => console.log(err))
+    }, []);
+
     return(
         <>
         <div className="session">
