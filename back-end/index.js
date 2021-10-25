@@ -3,7 +3,7 @@ const path = require('path');
 const session = require("express-session");
 const bodyParser = require('body-parser');
 const MongoStore = require('connect-mongo');
-
+const cors = require("cors");
 
 const app = express();
 const dal = require('./db/dal');
@@ -11,6 +11,8 @@ const dal = require('./db/dal');
 
 // app.set("trust proxy", 1);
 // app.use(express.static(path.join(__dirname + "/public")));
+
+app.use(cors());
 
 app.use(bodyParser.urlencoded({
         extended: true
