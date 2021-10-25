@@ -60,7 +60,7 @@ function Landing(){
     },[authing])
     return(
         <section>
-            {authing ? <LandingWithSession /> : <LandingWithOutSession />}
+            {authing.isAuth ? <LandingWithSession /> : <LandingWithOutSession />}
         </section>
     )
 }

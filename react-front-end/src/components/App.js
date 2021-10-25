@@ -28,7 +28,7 @@ function App() {
   }, []);
 
   return (
-    <AuthContext.Provider value={isAuth}>
+    <AuthContext.Provider value={{isAuth, checkAuth}}>
       <div className="App">
         {/* <nav>
           <div>
