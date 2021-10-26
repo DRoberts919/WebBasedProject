@@ -17,17 +17,26 @@ export default function Board() {
 
     useEffect(() => {
 
-        fetch("http://localhost:3005/api/board", {
-            credentials: "same-origin",
-            method: 'POST', 
-            headers: {
-            'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({name: "bardssadfdsaf"})
-        }).then( response => {
-            console.log(response);
+        // fetch("http://localhost:3005/api/board", {
+        //     credentials: "same-origin",
+        //     method: 'POST', 
+        //     headers: {
+        //     'Content-Type': 'application/json'
+        //     },
+        //     body: JSON.stringify({name: "bardssadfdsaf"})
+        // }).then( response => {
+        //     console.log(response);
             
-        });
+        // });
+        fetch('http://localhost:3005/api/auth', {
+            credentials:"same-origin",
+            mode: "cors",
+            method: "GET"
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log(data);
+        }).catch(error => console.log(error));
     }, []);
 
     return(

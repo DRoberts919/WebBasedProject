@@ -29,13 +29,15 @@ app.use(session({
         }),
         secret: require('../secrets').session.secret,
         resave: false,
-        saveUninitialized: false,
+        saveUninitialized: true,
         cookie: {
                 maxAge: 1000 * 60 * 60 * 24 * 30,
                 sameSite: 'lax',
-                secure: 'auto'
+                secure: 'false'
         }
 }));
+
+
 
 let routeFiles = ['api/boards', 'api/users'];
 const routeManager = require('./routes/manager');
