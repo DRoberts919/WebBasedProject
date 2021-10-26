@@ -100,6 +100,7 @@ const removeUser = async (user_id) => {
 const authenticate = async ({identifier, password}) => {
 	return dbclient.db('Bello').collection('Users').findOne({"email":identifier})
 		.then(result => {
+			// console.log(result);
 			if (result)
 				return verify_hash(result.password, password).then(ok => {
 					if (ok) return result.user_id;
