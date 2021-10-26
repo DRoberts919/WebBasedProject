@@ -30,7 +30,7 @@ const authenticate = (req, res, next) => {
 			}
 			if (value) {
 				req.session.user_id = value;
-				console.log("session created");
+				console.log("session created for ", value);
 				res.statusMessage = 'Authenticated';
 				res.status(200).end();
 				return;

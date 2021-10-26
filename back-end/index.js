@@ -20,7 +20,7 @@ app.use(bodyParser.urlencoded({
 app.use(bodyParser.json());
 
 
-// app.use(require('cookie-parser')(require('./secrets').session.secret));
+app.use(require('cookie-parser')(require('../secrets').session.secret));
 
 app.use(session({
         store: MongoStore.create({

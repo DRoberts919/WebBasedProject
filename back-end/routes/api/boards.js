@@ -7,6 +7,8 @@ const configure = (obj) => {
 const { requireAuth, requireNotAuth, handle } = require('../util');
 
 const createBoard = (req, res) => {
+	console.log(req);
+	console.log(req.session.user_id, req.body);
 	dal.createBoard(req.session.user_id, req.body).then((result) => {
 		res.json(result);
 	})
@@ -66,7 +68,7 @@ const routes = [
 		handler: [requireAuth(), getBoard]
 	},
 	{
-		uri: '/api/board',
+		uri: '/api/boards',
 		methods: ['get'],
 		handler: [requireAuth(), getBoardsByUser]
 	},
