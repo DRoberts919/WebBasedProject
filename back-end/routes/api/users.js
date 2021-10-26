@@ -9,6 +9,7 @@ const { requireAuth, requireNotAuth, handle } = require('../util');
 const createUser = (req, res) => {
 	dal.createUser(req.body)
 		.then((user_id) => {
+			// console.log(user_id);
 			req.session.user_id = user_id.toString(); // log them in
 			console.log("session created");
 			res.status(201);
