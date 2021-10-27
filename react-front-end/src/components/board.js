@@ -140,42 +140,42 @@ export default function Board() {
     const { board_id } = useParams();
     const [board, setBoard] = useState({});
 
-    // useEffect(() => {
-    //     fetch(`http://localhost:3005/api/board/${board_id}`, {credentials: "include"})
-    //     .then(response => response.json())
-    //     .then(data => {
-    //         setBoard(data);
-    //     })
-    //     .catch(err => console.log(err))
-    // }, []);
-
     useEffect(() => {
-
-        // fetch("http://localhost:3005/api/board", {
-        //     credentials: "same-origin",
-        //     method: 'POST', 
-        //     headers: {
-        //     'Content-Type': 'application/json'
-        //     },
-        //     body: JSON.stringify({name: "bardssadfdsaf"})
-        // }).then( response => {
-        //     console.log(response);
-            
-        // });
-        fetch('http://localhost:3005/api/auth', {
-            credentials:"include",
-            mode: "cors",
-            method: "GET"
-        })
+        fetch(`http://localhost:3005/api/board/${board_id}`, {credentials: "include"})
         .then(response => response.json())
         .then(data => {
-            console.log(data);
-        }).catch(error => console.log(error));
-
-
-
-        // }).then(response => console.log(response));
+            setBoard(data);
+        })
+        .catch(err => console.log(err))
     }, []);
+
+    // useEffect(() => {
+
+    //     // fetch("http://localhost:3005/api/board", {
+    //     //     credentials: "same-origin",
+    //     //     method: 'POST', 
+    //     //     headers: {
+    //     //     'Content-Type': 'application/json'
+    //     //     },
+    //     //     body: JSON.stringify({name: "bardssadfdsaf"})
+    //     // }).then( response => {
+    //     //     console.log(response);
+            
+    //     // });
+    //     fetch('http://localhost:3005/api/auth', {
+    //         credentials:"include",
+    //         mode: "cors",
+    //         method: "GET"
+    //     })
+    //     .then(response => response.json())
+    //     .then(data => {
+    //         console.log(data);
+    //     }).catch(error => console.log(error));
+
+
+
+    //     // }).then(response => console.log(response));
+    // }, []);
 
     return(
         <>

@@ -13,7 +13,7 @@ function App() {
   
 
   const checkAuth = async () => {
-    fetch('/api/auth', {credentials:"include"})
+    fetch('http://localhost:3005/api/auth', {credentials:"include", mode:"cors"})
     .then(response => response.json())
     .then(data => {
       setCurrUser(data);
