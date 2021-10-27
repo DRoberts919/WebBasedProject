@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from "react";
 import "./board.css";
 import { useParams } from 'react-router-dom';
+import axios from 'axios';
 
 export default function Board() {
     const { board_id } = useParams();
@@ -29,7 +30,7 @@ export default function Board() {
             
         // });
         fetch('http://localhost:3005/api/auth', {
-            credentials:"same-origin",
+            credentials:"include",
             mode: "cors",
             method: "GET"
         })
@@ -37,6 +38,10 @@ export default function Board() {
         .then(data => {
             console.log(data);
         }).catch(error => console.log(error));
+
+
+
+        // }).then(response => console.log(response));
     }, []);
 
     return(

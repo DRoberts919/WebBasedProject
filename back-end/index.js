@@ -12,7 +12,14 @@ const dal = require('./db/dal');
 // app.set("trust proxy", 1);
 // app.use(express.static(path.join(__dirname + "/public")));
 
-app.use(cors());
+var corsOptions = {
+  origin:  ['http://localhost:3000', 'http://192.168.1.101:3000'],
+  credentials: true,
+  optionsSuccessStatus: 200,
+  allowedHeaders: "DNT,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Range,Set-Cookie",
+  exposedHeaders: "Set-Cookie"
+}
+app.use(cors(corsOptions));
 
 app.use(bodyParser.urlencoded({
         extended: true
@@ -28,12 +35,14 @@ app.use(session({
                 dbName: 'Bello'
         }),
         secret: require('../secrets').session.secret,
+        name: 'bello.session',
         resave: false,
-        saveUninitialized: true,
+        saveUninitialized: false,
         cookie: {
-                maxAge: 1000 * 60 * 60 * 24 * 30,
-                sameSite: 'lax',
-                secure: 'false'
+                maxAge: 1000 * 60 * 60 * 24 * 30//,
+                // sameSite: "lax",
+                // secure: false,
+                // httpOnly: false
         }
 }));
 

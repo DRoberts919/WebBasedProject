@@ -2,6 +2,7 @@ import React, { useState, useContext } from 'react';
 import { Redirect } from 'react-router-dom';
 import {AuthContext} from "./App"
 import './login.css';
+import axios from 'axios';
 
 export default function Login() {
     const [errorMessage, setErrorMessage] = useState('');
@@ -30,10 +31,13 @@ export default function Login() {
             }
             fetch("http://localhost:3005/api/auth", {
                 method: 'POST', 
+                credentials: 'include',
                 headers: {
                 'Content-Type': 'application/json'
                 },
                 body: JSON.stringify(postData)
+
+
             }).then( response => {
                 console.log(response);
                 if(response.ok)  {
