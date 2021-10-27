@@ -151,6 +151,7 @@ const getBoardById = async (board_id) => {
 }
 
 const getBoardsByUser = async (user_id) => {
+	console.log(user_id, "dsfadshzsfadsfawefasfdfadsfs");
 	let boardArray = await dbclient.db('Bello').collection('Boards').find({"user_id": user_id}).toArray()
 	.catch(err => { throw ['An error occurred while finding board by user id'];});
 	return boardArray;
