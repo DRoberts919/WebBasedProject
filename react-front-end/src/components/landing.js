@@ -69,6 +69,9 @@ function Landing(){
     useEffect(()=>{
         console.log(authing)
     },[authing])
+    useEffect(()=>{
+        authing.checkAuth();
+    },[])
     return(
         <section>
             {authing.isAuth ? <LandingWithSession /> : <LandingWithOutSession />}
