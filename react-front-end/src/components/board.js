@@ -1,7 +1,6 @@
 import React, {useState, useEffect} from "react";
 import "./board.css";
 import { useParams } from 'react-router-dom';
-import axios from 'axios';
 
 export default function Board() {
     const { board_id } = useParams();

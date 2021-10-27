@@ -2,7 +2,6 @@ import React, { useState, useContext } from 'react';
 import { Redirect } from 'react-router-dom';
 import {AuthContext} from "./App"
 import './login.css';
-import axios from 'axios';
 
 export default function Login() {
     const [errorMessage, setErrorMessage] = useState('');
