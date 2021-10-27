@@ -32,15 +32,55 @@ function LandingWithOutSession() {
 
 function LandingWithSession(){
     const [boards, setBoards] = useState([]);
+    const [boardCount, setBoardCount] = useState(0);
+    const [boardsJSX, setBoardsJSX] = useState(<></>);
+    const [newBoardName, setNewBoardName] = useState("AHHHHH");
     //fetch all boards for user
     useEffect(() => {
-        fetch("/api/boards", {credentials: "include"})
+        fetch("http://localhost:3005/api/boards", {credentials: "include", mode:"cors"})
         .then(response => response.json())
         .then(data => {
+            console.log(data);
             setBoards(data);
         })
         .catch(err => console.log(err))
-    }, []);
+    }, [boardCount]);
+
+    useEffect( () => {
+        renderBoardJSX();
+    },[boards]);
+
+    const renderBoardJSX = () => {
+        let tempJSX = [];
+
+        boards.forEach(board => {
+            tempJSX.push
+            (<Link to={`/board/${board.board_id}`} className="board-card">
+                <div className="color-section"></div>
+                <div className="text-section"><p>{board.name}</p></div>
+            </Link>);
+        });
+        console.log(tempJSX);
+        setBoardsJSX( tempJSX);
+    }
+    const addBoard = () => {
+        
+        fetch("http://localhost:3005/api/board", {
+            method: 'POST', 
+            credentials: 'include',
+            headers: {
+            'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({name: newBoardName})
+        })
+        .then(response => {
+            if(response.ok) {
+                //Force board list to rerender
+                setBoardCount(boardCount+ 1);
+            }
+        })
+        .catch(err => console.log(err))
+    }
 
     return(
         <>
@@ -50,7 +90,7 @@ function LandingWithSession(){
             </div>
         </div>
         <div className="board-list">
-            <Link to="/board/:board_id" className="board-card">
+            {/* <Link to="/board/:board_id" className="board-card">
                 <div className="color-section"></div>
                 <div className="text-section"><p>Board Name</p></div>
             </Link>
@@ -58,8 +98,10 @@ function LandingWithSession(){
             <Link to="/board/:board_id" className="board-card">
                 <div className="color-section"></div>
                 <div className="text-section"><p>Board Name</p></div>
-            </Link>
+            </Link> */}
+            {boardsJSX}
         </div>
+        <div className="add-board-btn" onClick={() => {addBoard()}}>Add Board</div>
         </>
     )
 }
@@ -67,7 +109,7 @@ function LandingWithSession(){
 function Landing(){
     const authing = useContext(AuthContext)
     useEffect(()=>{
-        console.log(authing)
+        // console.log(authing)
     },[authing])
     useEffect(()=>{
         authing.checkAuth();

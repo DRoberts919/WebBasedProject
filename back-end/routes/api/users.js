@@ -30,11 +30,11 @@ const authenticate = (req, res, next) => {
 				return;
 			}
 			if (value) {
-				console.log(value, typeof(value));
+				// console.log(value, typeof(value));
 				req.session.user_id = value;
 				req.session.save();
 				console.log("session created for ", value);
-				console.log(req.session);
+				// console.log(req.session);
 				res.statusMessage = 'Authenticated';
 				res.status(200).end();
 				return;
@@ -65,7 +65,7 @@ const getUser = (req, res) => {
 
 
 const checkSession = (req, res) => {
-	console.log("check Auth:",req.session);
+	// console.log("check Auth:",req.session);
 	
 	if(req.session && req.session.user_id) {
 		dal.getUserById({user_id: req.session.user_id}).then( user => {

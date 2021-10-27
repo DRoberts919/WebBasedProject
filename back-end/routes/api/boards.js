@@ -24,7 +24,7 @@ const getBoard = (req, res) => {
 
 
 const getBoardsByUser = (req, res) => {
-	dal.getBoardsByUser(req.params.user_id).then(result => {
+	dal.getBoardsByUser(req.session.user_id).then(result => {
 		res.json(result);
 	})
 	.catch(handle(req, res));
