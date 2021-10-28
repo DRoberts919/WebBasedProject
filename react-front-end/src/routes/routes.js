@@ -1,4 +1,4 @@
-import React, { useEffect, useContext } from 'react';
+import React, { useEffect, useContext, useState } from 'react';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 
 import {AuthContext} from '../components/App';
@@ -10,6 +10,7 @@ import Signup from '../components/signup';
 
 
 export default function Routes() {
+    const [redirect, setRedirect] = useState(false);
     const authing = useContext(AuthContext)
     useEffect(()=>{
         console.log(authing)
@@ -30,14 +31,31 @@ export default function Routes() {
             </nav>
         )
     }
+
+    const loggingOut = event => {
+        event.preventDefault();
+
+        fetch("http://localhost:3005/api/auth", {
+            method: 'DELETE', 
+            credentials: 'include'
+
+        }).then( response => {
+            console.log(response);
+            if(response.ok)  {
+                authing.checkAuth();
+                setRedirect(true);
+            }
+        });
+    }
     
     function WithNavName(){
         return(
             <nav>
                 <div>
                     <h1><Link to="/">Bello</Link></h1>
+                    <h3>{authing.currUser.name}</h3>
                     <div className="btn-group">
-                        <h3>{authing.currUser.name}</h3>
+                        <Link onClick={loggingOut} className="btn solid light" to="/">Log Out</Link>
                     </div>
                 </div>
             </nav>
@@ -46,7 +64,7 @@ export default function Routes() {
     return (
         <Router>
             <section>
-                {authing.isAuth ? <WithNavName /> : <WithOutNavName />}
+                {authing.isAuth && authing.currUser ? <WithNavName /> : <WithOutNavName />}
             </section>
             <div className="content">
                 {/* <Route path="/" Component={landing}> */}
