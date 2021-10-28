@@ -210,7 +210,17 @@ export default function Board() {
                 task.description = newText;
             }
         });
-        console.log(newTaskLists);
+        setTaskLists(newTaskLists);
+    }
+    const deleteTask = (list_id, task_id) => {
+        let newTaskLists = [...taskLists];
+        let parentList;
+        newTaskLists.forEach(list => {
+            if(list_id === list.list_id) {
+                parentList = list;
+            }
+        });
+        parentList.tasks = parentList.tasks.filter((task) => (task.task_id != task_id));
         setTaskLists(newTaskLists);
     }
 
@@ -226,7 +236,7 @@ export default function Board() {
                     tasksJSX.push(
                         <div className="task-card" id={task.task_id}>
                             <input type="text" value={task.description} onChange={e => updateTaskText(list.list_id, task.task_id, e.target.value)}/>
-                            <div className="task-btn"><i className="fa fa-trash" aria-hidden="true"></i></div>
+                            <div className="task-btn" onClick={() => deleteTask(list.list_id, task.task_id)}><i className="fa fa-trash" aria-hidden="true"></i></div>
                         </div>
                     );
                 });
@@ -257,27 +267,6 @@ export default function Board() {
             </div>
         </div>
         <div className="list-container">
-            <div className="task-list">
-                <div className="list-header"><h3>List 1</h3></div>
-                <div className="list-body">
-                    <div className="task-card">
-                        <p>Card 1</p>
-                        <div className="task-btn"><i className="fa fa-trash" aria-hidden="true"></i></div>
-                    </div>
-                </div>
-            </div>
-            <div className="task-list">
-                <div className="list-header"><h3>List 2</h3></div>
-                <div className="list-body">
-                    <div className="task-card">
-                        <p>Card 1</p>
-                        <div className="task-btn"><i className="fa fa-trash" aria-hidden="true"></i></div>
-                    </div><div className="task-card">
-                        <p>Card 2</p>
-                        <div className="task-btn"><i className="fa fa-trash" aria-hidden="true"></i></div>
-                    </div>
-                </div>
-            </div>
             {taskListsJSX}
             <div onClick={() => {newList()}}>
                 + Add List
