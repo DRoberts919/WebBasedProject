@@ -30,11 +30,33 @@ function LandingWithOutSession() {
     )
 }
 
+function TheModal({newBoardName, setNewBoardName, addBoard, setShowModal}){
+
+    return(
+        <div className="modalSpace">
+            <div className="modalContent">
+                <div className="modalHeader">
+                    <h4 className="modalTitle">Name New Board</h4>
+                </div>
+                <div className="modalBody">
+                    <input type="text" value={newBoardName} onChange={(e) => setNewBoardName(e.target.value)} />
+                </div>
+                <div className="modalFooter">
+                    <button className="modalButton" onClick={() => {addBoard();
+                    setShowModal(false)}}>Submit</button>
+                </div>
+            </div>
+        </div>
+    )
+}
+
 function LandingWithSession(){
     const [boards, setBoards] = useState([]);
     const [boardCount, setBoardCount] = useState(0);
     const [boardsJSX, setBoardsJSX] = useState(<></>);
-    const [newBoardName, setNewBoardName] = useState("AHHHHH");
+    const [newBoardName, setNewBoardName] = useState("New Board");
+    const [showModal, setShowModal] = useState(false);
+
     //fetch all boards for user
     useEffect(() => {
         fetch("http://localhost:3005/api/boards", {credentials: "include", mode:"cors"})
@@ -82,6 +104,8 @@ function LandingWithSession(){
         .catch(err => console.log(err))
     }
 
+    
+
     return(
         <>
         <div className="session">
@@ -101,7 +125,8 @@ function LandingWithSession(){
             </Link> */}
             {boardsJSX}
         </div>
-        <div className="add-board-btn" onClick={() => {addBoard()}}>Add Board</div>
+        {showModal ? <TheModal newBoardName={newBoardName} setNewBoardName={setNewBoardName} addBoard={addBoard} setShowModal={setShowModal}/> : <></>}
+        <div className="btn solid primary" onClick={() => setShowModal(!showModal)}>Add Board</div>
         </>
     )
 }
