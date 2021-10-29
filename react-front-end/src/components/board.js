@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, {useState, useEffect, useRef} from "react";
 import "./board.css";
 import { useParams, Redirect } from 'react-router-dom';
 
@@ -136,6 +136,26 @@ function addToList() {
 
 }
 
+function useInterval(callback, delay) {
+    const savedCallback = useRef();
+  
+    // Remember the latest callback.
+    useEffect(() => {
+      savedCallback.current = callback;
+    }, [callback]);
+  
+    // Set up the interval.
+    useEffect(() => {
+      function tick() {
+        savedCallback.current();
+      }
+      if (delay !== null) {
+        let id = setInterval(tick, delay);
+        return () => clearInterval(id);
+      }
+    }, [delay]);
+  }
+
 
 
 export default function Board() {
@@ -151,7 +171,11 @@ export default function Board() {
         .then(data => {
             console.log(data);
             setBoard(data);
-            setTaskLists(data.taskLists === '' ? [] : data.taskLists);
+            let lists = [];
+            try {
+                lists = JSON.parse(data.taskLists);
+            }catch (e){ console.log(e)};
+            setTaskLists(lists);
         })
         .catch(err => {
             //Something went wrong
@@ -161,8 +185,41 @@ export default function Board() {
     }, []);
 
     useEffect(() => {
+        
+    }, [board]); 
+
+    useEffect(() => {
         renderListsJSX();
     }, [taskLists]);
+
+    //Save data every 5 seconds
+
+      useInterval(() => {
+        if(board && board.board_id) saveDataToDB();
+    }, 5000);
+
+    const saveDataToDB = () => {
+        const putData = {
+            board_id: board.board_id,
+            name: board.name,
+            user_id: board.user_id,
+            taskLists: JSON.stringify(taskLists)
+
+        }
+        console.log(putData);
+        fetch(`http://localhost:3005/api/board/${board_id}`, {
+            credentials: "include",
+            method:"PUT",
+            mode:"cors",
+            headers: {
+            'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(putData)
+
+        }).then(res => console.log(res))
+        .catch(err => console.log(err));
+    }
+
 
     const genId = () => {
         return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, c => {
@@ -182,7 +239,6 @@ export default function Board() {
                 );
             }
         });
-        console.log(newTaskLists);
         setTaskLists(newTaskLists);
         
 
@@ -246,9 +302,7 @@ export default function Board() {
 
     const renderListsJSX = () => {
         
-
         let tempJSX = [];
-        console.log(taskLists);
         if(!taskLists.length || taskLists === []) {
             setTaskListsJSX( <></>);
              return;
