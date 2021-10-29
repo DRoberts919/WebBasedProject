@@ -51,6 +51,14 @@
 .task-card input {
     border:none;
     background:transparent;
+
+}
+.list-header input {
+    border:none;
+    background:transparent;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--color-dark);
 }
 
 .task-card .task-btn {
@@ -63,4 +71,25 @@
 .task-card .task-btn:hover {
     color: var(--color-danger);
     opacity:1;
+}
+
+.add-task {
+    width:100%;
+    box-sizing: border-box;
+    background-color: var(--color-secondary);
+    transition:background-color 0.2s;
+    font-size: 0.9rem;
+}
+
+.add-task:hover {
+    background-color: #cddef7;
+}
+
+.add-list {
+    width:265px;
+    height: fit-content;
+    box-sizing: border-box;
+    background-color: var(--color-secondary);
+    transition:background-color 0.2s;
+    font-size: 0.9rem;
 }

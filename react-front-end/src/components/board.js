@@ -223,6 +223,16 @@ export default function Board() {
         parentList.tasks = parentList.tasks.filter((task) => (task.task_id != task_id));
         setTaskLists(newTaskLists);
     }
+    const updateListHeader = (list_id, value) => {
+        let newTaskLists = [...taskLists];
+        newTaskLists.forEach(list => {
+            if(list_id === list.list_id) {
+                list.listName = value;
+            }
+        });
+       
+        setTaskLists(newTaskLists);
+    }
 
     const renderListsJSX = () => {
         
@@ -242,11 +252,11 @@ export default function Board() {
                 });
             }
             tasksJSX.push(
-                <div onClick={() => addNewTask(list.list_id)}> + New Task</div>
+                <div onClick={() => addNewTask(list.list_id)} className="btn add-task"> + New Task</div>
             );
             tempJSX.push(
                 <div className="task-list" id={taskLists.list_id}>
-                <div className="list-header"><h3>{list.listName}</h3></div>
+                <div className="list-header"><input type="text" value={list.listName} onChange={e => updateListHeader(list.list_id, e.target.value)}/></div>
                 <div className="list-body">
                     {tasksJSX}
                 </div>
@@ -268,10 +278,11 @@ export default function Board() {
         </div>
         <div className="list-container">
             {taskListsJSX}
-            <div onClick={() => {newList()}}>
+            <div onClick={() => {newList()}} className="btn add-list">
                 + Add List
             </div>
         </div>
         </>
     )
 }
+
