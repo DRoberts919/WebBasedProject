@@ -53,22 +53,28 @@
     background:transparent;
 
 }
+.list-header {
+    display:flex;
+    box-sizing: border-box;
+}
 .list-header input {
     border:none;
     background:transparent;
     font-size: 1.1rem;
     font-weight: 600;
     color: var(--color-dark);
+    width:100%; 
 }
 
-.task-card .task-btn {
+.task-card .task-btn, .list-btn {
     margin-left: auto;
     cursor:pointer;
     opacity: 0.5;
     transition: opacity 0.2s, color 0.2s;
 }
 
-.task-card .task-btn:hover {
+
+.task-card .task-btn:hover, .list-btn:hover {
     color: var(--color-danger);
     opacity:1;
 }

@@ -223,6 +223,16 @@ export default function Board() {
         parentList.tasks = parentList.tasks.filter((task) => (task.task_id != task_id));
         setTaskLists(newTaskLists);
     }
+    const deleteList = (list_id) => {
+        if(taskLists.length === 1 && taskLists[0].list_id === list_id) {
+            setTaskLists([]);
+            return;
+        }
+        let newTaskLists = [...taskLists];
+        
+        newTaskLists = newTaskLists.filter((list) => (list.list_id != list_id));
+        setTaskLists(newTaskLists);
+    }
     const updateListHeader = (list_id, value) => {
         let newTaskLists = [...taskLists];
         newTaskLists.forEach(list => {
@@ -238,7 +248,11 @@ export default function Board() {
         
 
         let tempJSX = [];
-        if(!taskLists.length) return null;
+        console.log(taskLists);
+        if(!taskLists.length || taskLists === []) {
+            setTaskListsJSX( <></>);
+             return;
+            }
         taskLists.forEach((list) => {
             let tasksJSX = [];
             if(list.tasks && list.tasks.length) {
@@ -252,11 +266,14 @@ export default function Board() {
                 });
             }
             tasksJSX.push(
-                <div onClick={() => addNewTask(list.list_id)} className="btn add-task"> + New Task</div>
+                <div onClick={() => addNewTask(list.list_id)} className="btn add-task"> + Add Task</div>
             );
             tempJSX.push(
-                <div className="task-list" id={taskLists.list_id}>
-                <div className="list-header"><input type="text" value={list.listName} onChange={e => updateListHeader(list.list_id, e.target.value)}/></div>
+                <div className="task-list" id={list.list_id}>
+                <div className="list-header">
+                    <input type="text" value={list.listName} onChange={e => updateListHeader(list.list_id, e.target.value)}/>
+                    <div className="list-btn" onClick={() => deleteList(list.list_id)}><i className="fa fa-trash" aria-hidden="true"></i></div>
+                    </div>
                 <div className="list-body">
                     {tasksJSX}
                 </div>
