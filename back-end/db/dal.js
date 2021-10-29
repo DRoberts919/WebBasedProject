@@ -139,14 +139,12 @@ const createBoard = async (user_id, _board) => {
 	
 }
 const getBoardById = async (board_id) => {
-    getBoardById(board_id).then(result => {
-        if(result.user_id != user_id) throw ['The user does not own the board they are attemting to get'];
+
+	return dbclient.db('Bello').collection('Boards').findOne({board_id}).then(result => {
+		return result;
+	})
+	.catch(err => { throw ['An error occurred while finding board by id'];});
 	
-		return dbclient.db('Bello').collection('Boards').findOne({board_id}).then(result => {
-            return result;
-        })
-        .catch(err => { throw ['An error occurred while finding board by id'];});
-	}).catch(err => { console.log(err); throw ['An error occurred while updating board'];});
 	
 }
 

@@ -48,8 +48,9 @@
     grid-template-columns: auto 1.5rem;
 }
 
-.task-card p {
-    margin:0;
+.task-card input {
+    border:none;
+    background:transparent;
 }
 
 .task-card .task-btn {

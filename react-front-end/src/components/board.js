@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from "react";
 import "./board.css";
-import { useParams } from 'react-router-dom';
+import { useParams, Redirect } from 'react-router-dom';
 
 /* function addToDo() {
   var a = document.getElementById("to-do-list");
@@ -136,75 +136,140 @@ function addToList() {
 
 }
 
+
+
 export default function Board() {
     const { board_id } = useParams();
     const [board, setBoard] = useState({});
+    const [taskLists, setTaskLists] = useState([]);
+    const [taskListsJSX, setTaskListsJSX] = useState([]);
+    const [redirect, setRedirect] = useState(false);
 
     useEffect(() => {
-        fetch(`http://localhost:3005/api/board/${board_id}`, {credentials: "include"})
+        fetch(`http://localhost:3005/api/board/${board_id}`, {credentials: "include", method:"GET", mode:"cors"})
         .then(response => response.json())
         .then(data => {
+            console.log(data);
             setBoard(data);
+            setTaskLists(data.taskLists === '' ? [] : data.taskLists);
         })
-        .catch(err => console.log(err))
+        .catch(err => {
+            //Something went wrong
+            //Maybe user doesnt own the board
+            setRedirect(true);
+        })
     }, []);
 
-    // useEffect(() => {
+    useEffect(() => {
+        renderListsJSX();
+    }, [taskLists]);
 
-    //     // fetch("http://localhost:3005/api/board", {
-    //     //     credentials: "same-origin",
-    //     //     method: 'POST', 
-    //     //     headers: {
-    //     //     'Content-Type': 'application/json'
-    //     //     },
-    //     //     body: JSON.stringify({name: "bardssadfdsaf"})
-    //     // }).then( response => {
-    //     //     console.log(response);
-            
-    //     // });
-    //     fetch('http://localhost:3005/api/auth', {
-    //         credentials:"include",
-    //         mode: "cors",
-    //         method: "GET"
-    //     })
-    //     .then(response => response.json())
-    //     .then(data => {
-    //         console.log(data);
-    //     }).catch(error => console.log(error));
+    const genId = () => {
+        return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, c => {
+            let r = Math.random() * 16 | 0, v = c === 'x' ? r : (r & 0x3 | 0x8);
+            return v.toString(16);
+        });
+    }
+    const addNewTask = (list_id) => {
+        let newTaskLists = [...taskLists];
+        newTaskLists.forEach(list => {
+            if(list_id === list.list_id) {
+                list.tasks.push(			
+                    {
+                    task_id: genId(),
+                    description:"New Task"
+                    }
+                );
+            }
+        });
+        console.log(newTaskLists);
+        setTaskLists(newTaskLists);
+        
 
+    }
+    const newList = () => {
+        //create a new list here
+        setTaskLists([...taskLists, {
+            list_id: genId(),
+            listName: "New List",
+            tasks: [ ]
+            }]);
 
+       
+    }
+    const updateTaskText = (list_id, task_id, newText) => {
+        let newTaskLists = [...taskLists];
+        let parentList;
+        newTaskLists.forEach(list => {
+            if(list_id === list.list_id) {
+                parentList = list;
+            }
+        });
+        if(parentList)parentList.tasks.forEach(task => {
+            if(task.task_id === task_id) {
+                task.description = newText;
+            }
+        });
+        setTaskLists(newTaskLists);
+    }
+    const deleteTask = (list_id, task_id) => {
+        let newTaskLists = [...taskLists];
+        let parentList;
+        newTaskLists.forEach(list => {
+            if(list_id === list.list_id) {
+                parentList = list;
+            }
+        });
+        parentList.tasks = parentList.tasks.filter((task) => (task.task_id != task_id));
+        setTaskLists(newTaskLists);
+    }
 
-    //     // }).then(response => console.log(response));
-    // }, []);
+    const renderListsJSX = () => {
+        
 
+        let tempJSX = [];
+        if(!taskLists.length) return null;
+        taskLists.forEach((list) => {
+            let tasksJSX = [];
+            if(list.tasks && list.tasks.length) {
+                list.tasks.forEach((task) => {
+                    tasksJSX.push(
+                        <div className="task-card" id={task.task_id}>
+                            <input type="text" value={task.description} onChange={e => updateTaskText(list.list_id, task.task_id, e.target.value)}/>
+                            <div className="task-btn" onClick={() => deleteTask(list.list_id, task.task_id)}><i className="fa fa-trash" aria-hidden="true"></i></div>
+                        </div>
+                    );
+                });
+            }
+            tasksJSX.push(
+                <div onClick={() => addNewTask(list.list_id)}> + New Task</div>
+            );
+            tempJSX.push(
+                <div className="task-list" id={taskLists.list_id}>
+                <div className="list-header"><h3>{list.listName}</h3></div>
+                <div className="list-body">
+                    {tasksJSX}
+                </div>
+            </div>
+            );
+        });
+        setTaskListsJSX(tempJSX);
+
+    }
+
+    
+    if(redirect) return <Redirect to="/" />
     return(
         <>
         <div className="section">
             <div className="container">
-                <h2 className="text-center">Project Name</h2>
+                <h2 className="text-center">{board && board.name ? board.name : ""}</h2>
             </div>
         </div>
         <div className="list-container">
-            <div className="task-list">
-                <div className="list-header"><h3>List 1</h3></div>
-                <div className="list-body">
-                    <div className="task-card">
-                        <p>Card 1</p>
-                        <div className="task-btn"><i className="fa fa-trash" aria-hidden="true"></i></div>
-                    </div>
-                </div>
-            </div>
-            <div className="task-list">
-                <div className="list-header"><h3>List 2</h3></div>
-                <div className="list-body">
-                    <div className="task-card">
-                        <p>Card 1</p>
-                        <div className="task-btn"><i className="fa fa-trash" aria-hidden="true"></i></div>
-                    </div><div className="task-card">
-                        <p>Card 2</p>
-                        <div className="task-btn"><i className="fa fa-trash" aria-hidden="true"></i></div>
-                    </div>
-                </div>
+            {taskListsJSX}
+            <div onClick={() => {newList()}}>
+                + Add List
             </div>
         </div>
         </>
