@@ -170,7 +170,6 @@ export default function Board() {
         fetch(`http://localhost:3005/api/board/${board_id}`, {credentials: "include", method:"GET", mode:"cors"})
         .then(response => response.json())
         .then(data => {
-            console.log(data);
             setBoard(data);
             let lists = [];
             try {
@@ -207,7 +206,6 @@ export default function Board() {
             taskLists: JSON.stringify(taskLists)
 
         }
-        console.log(putData);
         fetch(`http://localhost:3005/api/board/${board_id}`, {
             credentials: "include",
             method:"PUT",
@@ -217,7 +215,7 @@ export default function Board() {
             },
             body: JSON.stringify(putData)
 
-        }).then(res => console.log(res))
+        })
         .catch(err => console.log(err));
     }
 
@@ -322,7 +320,6 @@ export default function Board() {
             });
         }
 
-        console.log(newTaskLists);
 
         setTaskLists(newTaskLists);
     }
