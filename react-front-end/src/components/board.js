@@ -362,6 +362,7 @@ export default function Board() {
                     {(provided) => (
                         <div className="list-body" {...provided.droppableProps} ref={provided.innerRef}>
                             {tasksJSX}
+                            {provided.placeholder}
                         </div>
                     )}
                 </Droppable>
