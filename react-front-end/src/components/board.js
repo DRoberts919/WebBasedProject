@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from "react";
 import "./board.css";
 import { useParams, Redirect } from 'react-router-dom';
+import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 
 /* function addToDo() {
   var a = document.getElementById("to-do-list");
@@ -224,20 +225,36 @@ export default function Board() {
         setTaskLists(newTaskLists);
     }
 
+    function handleOnDragEnd(result) {
+        console.log(result);
+        if (!result.destination) 
+        return;
+
+        let newTaskLists = [...taskLists];
+
+        const [reorderedItem] = newTaskLists.splice(result.source.index, 1);
+        newTaskLists.splice(result.destination.index, 0, reorderedItem);
+
+        setTaskLists(newTaskLists);
+    }
+
     const renderListsJSX = () => {
-        
 
         let tempJSX = [];
         if(!taskLists.length) return null;
         taskLists.forEach((list) => {
             let tasksJSX = [];
             if(list.tasks && list.tasks.length) {
-                list.tasks.forEach((task) => {
+                list.tasks.forEach((task, taskIndex) => {
                     tasksJSX.push(
-                        <div className="task-card" id={task.task_id}>
-                            <input type="text" value={task.description} onChange={e => updateTaskText(list.list_id, task.task_id, e.target.value)}/>
-                            <div className="task-btn" onClick={() => deleteTask(list.list_id, task.task_id)}><i className="fa fa-trash" aria-hidden="true"></i></div>
-                        </div>
+                        <Draggable key={task.task_id} draggableId={task.task_id} index={taskIndex}>
+                            {(provided) => (
+                                <div className="task-card" ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}>
+                                    <input type="text" value={task.description} onChange={e => updateTaskText(list.list_id, task.task_id, e.target.value)}/>
+                                    <div className="task-btn" onClick={() => deleteTask(list.list_id, task.task_id)}><i className="fa fa-trash" aria-hidden="true"></i></div>
+                                </div>
+                            )}
+                        </Draggable>
                     );
                 });
             }
@@ -247,9 +264,15 @@ export default function Board() {
             tempJSX.push(
                 <div className="task-list" id={taskLists.list_id}>
                 <div className="list-header"><h3>{list.listName}</h3></div>
-                <div className="list-body">
-                    {tasksJSX}
-                </div>
+                <DragDropContext onDragEnd={handleOnDragEnd}>
+                <Droppable droppableId={list.list_id}>
+                    {(provided) => (
+                        <div className="list-body" {...provided.droppableProps} ref={provided.innerRef}>
+                            {tasksJSX}
+                        </div>
+                    )}
+                </Droppable>
+                </DragDropContext>
             </div>
             );
         });
