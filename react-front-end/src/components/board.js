@@ -357,7 +357,7 @@ export default function Board() {
                     <input type="text" value={list.listName} onChange={e => updateListHeader(list.list_id, e.target.value)}/>
                     <div className="list-btn" onClick={() => deleteList(list.list_id)}><i className="fa fa-trash" aria-hidden="true"></i></div>
                     </div>
-                <DragDropContext onDragEnd={handleOnDragEnd}>
+                
                 <Droppable droppableId={list.list_id}>
                     {(provided) => (
                         <div className="list-body" {...provided.droppableProps} ref={provided.innerRef}>
@@ -366,7 +366,7 @@ export default function Board() {
                         </div>
                     )}
                 </Droppable>
-                </DragDropContext>
+                
 
             </div>
             );
@@ -385,7 +385,9 @@ export default function Board() {
             </div>
         </div>
         <div className="list-container">
+        <DragDropContext onDragEnd={handleOnDragEnd}>
             {taskListsJSX}
+            </DragDropContext>
             <div onClick={() => {newList()}} className="btn add-list">
                 + Add List
             </div>
