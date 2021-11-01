@@ -339,6 +339,7 @@ export default function Board() {
                         <Draggable key={task.task_id} draggableId={task.task_id} index={taskIndex}>
                             {(provided) => (
                                 <div className="task-card" ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}>
+                                    <div className="task-icon"><div></div><div></div><div></div></div>
                                     <input type="text" value={task.description} onChange={e => updateTaskText(list.list_id, task.task_id, e.target.value)}/>
                                     <div className="task-btn" onClick={() => deleteTask(list.list_id, task.task_id)}><i className="fa fa-trash" aria-hidden="true"></i></div>
                                 </div>
