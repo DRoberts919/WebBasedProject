@@ -307,9 +307,22 @@ export default function Board() {
         return;
 
         let newTaskLists = [...taskLists];
+        let reorderedItem;
+        newTaskLists.map(list => {
+            if(list.list_id === result.source.droppableId) {
+               reorderedItem = list.tasks.splice(result.source.index, 1);
+            }
+        });
+        if(reorderedItem) {
+            newTaskLists.map(list => {
+                if(list.list_id === result.destination.droppableId) {
+                    list.tasks.splice(result.destination.index, 0, ...reorderedItem);
 
-        const [reorderedItem] = newTaskLists.splice(result.source.index, 1);
-        newTaskLists.splice(result.destination.index, 0, reorderedItem);
+                }
+            });
+        }
+
+        console.log(newTaskLists);
 
         setTaskLists(newTaskLists);
     }
