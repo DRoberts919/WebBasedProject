@@ -15,7 +15,7 @@ function LandingWithOutSession() {
         </div>
         <div className="section grid">
             <div className="container">
-                <h1>Test</h1>
+                <img class="img center" src="demo.png" />
             </div>
         </div>
         <div className="spacer"></div>
