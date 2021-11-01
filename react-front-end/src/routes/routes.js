@@ -13,7 +13,7 @@ export default function Routes() {
     const [redirect, setRedirect] = useState(false);
     const authing = useContext(AuthContext)
     useEffect(()=>{
-        console.log(authing)
+        // console.log(authing)
     },[authing])
     useEffect(()=>{
         authing.checkAuth();

@@ -164,7 +164,7 @@ const updateBoard = async (board_id, user_id, board) => {
         if(result.user_id != user_id) throw ['The user does not own the board they are attemting to update'];
 		let newValues = { $set: {
 			name: board.name,
-			taskLists: board.tasksLists
+			taskLists: board.taskLists
 		}};
 		return dbclient.db('Bello').collection('Boards').updateOne({board_id}, newValues)
 		.catch(err => { console.log(err); throw ['An error occurred while updating board'];});

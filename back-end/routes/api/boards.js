@@ -7,8 +7,8 @@ const configure = (obj) => {
 const { requireAuth, requireNotAuth, handle } = require('../util');
 
 const createBoard = (req, res) => {
-	console.log(req);
-	console.log(req.session.user_id, req.body);
+	// console.log(req);
+	// console.log(req.session.user_id, req.body);
 	dal.createBoard(req.session.user_id, req.body).then((result) => {
 		res.json(result);
 	})
@@ -33,8 +33,8 @@ const getBoardsByUser = (req, res) => {
 
 
 
-//Variable data pieces: title, price, description, category, cover_image, page_structure
 const updateBoard = (req, res) => {
+	console.log(req.body);
 	dal.updateBoard(req.body.board_id, req.session.user_id, req.body).then(() => {
 		res.status(201);
 		res.statusMessage = 'Updated Board';

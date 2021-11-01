@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, {useState, useEffect, useRef} from "react";
 import "./board.css";
 import { useParams, Redirect } from 'react-router-dom';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
@@ -137,6 +137,26 @@ function addToList() {
 
 }
 
+function useInterval(callback, delay) {
+    const savedCallback = useRef();
+  
+    // Remember the latest callback.
+    useEffect(() => {
+      savedCallback.current = callback;
+    }, [callback]);
+  
+    // Set up the interval.
+    useEffect(() => {
+      function tick() {
+        savedCallback.current();
+      }
+      if (delay !== null) {
+        let id = setInterval(tick, delay);
+        return () => clearInterval(id);
+      }
+    }, [delay]);
+  }
+
 
 
 export default function Board() {
@@ -152,7 +172,11 @@ export default function Board() {
         .then(data => {
             console.log(data);
             setBoard(data);
-            setTaskLists(data.taskLists === '' ? [] : data.taskLists);
+            let lists = [];
+            try {
+                lists = JSON.parse(data.taskLists);
+            }catch (e){ console.log(e)};
+            setTaskLists(lists);
         })
         .catch(err => {
             //Something went wrong
@@ -162,8 +186,41 @@ export default function Board() {
     }, []);
 
     useEffect(() => {
+        
+    }, [board]); 
+
+    useEffect(() => {
         renderListsJSX();
     }, [taskLists]);
+
+    //Save data every 5 seconds
+
+      useInterval(() => {
+        if(board && board.board_id) saveDataToDB();
+    }, 5000);
+
+    const saveDataToDB = () => {
+        const putData = {
+            board_id: board.board_id,
+            name: board.name,
+            user_id: board.user_id,
+            taskLists: JSON.stringify(taskLists)
+
+        }
+        console.log(putData);
+        fetch(`http://localhost:3005/api/board/${board_id}`, {
+            credentials: "include",
+            method:"PUT",
+            mode:"cors",
+            headers: {
+            'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(putData)
+
+        }).then(res => console.log(res))
+        .catch(err => console.log(err));
+    }
+
 
     const genId = () => {
         return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, c => {
@@ -183,7 +240,6 @@ export default function Board() {
                 );
             }
         });
-        console.log(newTaskLists);
         setTaskLists(newTaskLists);
         
 
@@ -224,6 +280,26 @@ export default function Board() {
         parentList.tasks = parentList.tasks.filter((task) => (task.task_id != task_id));
         setTaskLists(newTaskLists);
     }
+    const deleteList = (list_id) => {
+        if(taskLists.length === 1 && taskLists[0].list_id === list_id) {
+            setTaskLists([]);
+            return;
+        }
+        let newTaskLists = [...taskLists];
+        
+        newTaskLists = newTaskLists.filter((list) => (list.list_id != list_id));
+        setTaskLists(newTaskLists);
+    }
+    const updateListHeader = (list_id, value) => {
+        let newTaskLists = [...taskLists];
+        newTaskLists.forEach(list => {
+            if(list_id === list.list_id) {
+                list.listName = value;
+            }
+        });
+       
+        setTaskLists(newTaskLists);
+    }
 
     function handleOnDragEnd(result) {
         console.log(result);
@@ -241,7 +317,10 @@ export default function Board() {
     const renderListsJSX = () => {
 
         let tempJSX = [];
-        if(!taskLists.length) return null;
+        if(!taskLists.length || taskLists === []) {
+            setTaskListsJSX( <></>);
+             return;
+            }
         taskLists.forEach((list) => {
             let tasksJSX = [];
             if(list.tasks && list.tasks.length) {
@@ -259,11 +338,15 @@ export default function Board() {
                 });
             }
             tasksJSX.push(
-                <div onClick={() => addNewTask(list.list_id)}> + New Task</div>
+                <div onClick={() => addNewTask(list.list_id)} className="btn add-task"> + Add Task</div>
             );
             tempJSX.push(
-                <div className="task-list" id={taskLists.list_id}>
-                <div className="list-header"><h3>{list.listName}</h3></div>
+
+                <div className="task-list" id={list.list_id}>
+                <div className="list-header">
+                    <input type="text" value={list.listName} onChange={e => updateListHeader(list.list_id, e.target.value)}/>
+                    <div className="list-btn" onClick={() => deleteList(list.list_id)}><i className="fa fa-trash" aria-hidden="true"></i></div>
+                    </div>
                 <DragDropContext onDragEnd={handleOnDragEnd}>
                 <Droppable droppableId={list.list_id}>
                     {(provided) => (
@@ -273,6 +356,7 @@ export default function Board() {
                     )}
                 </Droppable>
                 </DragDropContext>
+
             </div>
             );
         });
@@ -291,10 +375,11 @@ export default function Board() {
         </div>
         <div className="list-container">
             {taskListsJSX}
-            <div onClick={() => {newList()}}>
+            <div onClick={() => {newList()}} className="btn add-list">
                 + Add List
             </div>
         </div>
         </>
     )
 }
+
